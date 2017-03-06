@@ -93,18 +93,18 @@ app.controller('grupoController', function ($scope, $http) {
                             $scope.grupos.splice($scope.grupos.indexOf($scope.grupoLista), 1);
 
                         } else {
-                            Materialize.toast('Grupo não removido, tente novamente.', 5000, 'red lighten-1');
+                            Materialize.toast('1 Grupo não removido, tente novamente.', 5000, 'red lighten-1');
                         }
                     } else {
-                        Materialize.toast('Grupo não removido, tente novamente.', 5000, 'red lighten-1');
+                        Materialize.toast('2 Grupo não removido, tente novamente.', 5000, 'red lighten-1');
                     }
                 },function(response) {
                     console.log("Problema: " +response.data);
-                    Materialize.toast('Grupo não removido, tente novamente.', 5000, 'red lighten-1');
+                    Materialize.toast('3 Grupo não removido, tente novamente.', 5000, 'red lighten-1');
                 });
             }
         } else {
-            Materialize.toast('Grupo não removido, tente novamente.', 5000, 'red lighten-1');
+            Materialize.toast('4 Grupo não removido, tente novamente.', 5000, 'red lighten-1');
         }
     }
 

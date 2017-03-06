@@ -2,9 +2,7 @@ package br.ufsm.ecommerce.dao;
 
 import br.ufsm.ecommerce.model.Estoque;
 import br.ufsm.ecommerce.model.Produto;
-
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -62,7 +60,7 @@ public class EstoqueDAO {
             preparedStatement.setFloat(2, estoque.getPreco());
             preparedStatement.setInt(3, estoque.getSt());
             preparedStatement.setString(4, estoque.getLote());
-            preparedStatement.setDate(5, (Date) estoque.getValidade());
+            preparedStatement.setDate(5, estoque.getValidade());
             preparedStatement.setInt(6, estoque.getQtdMinima());
             preparedStatement.setInt(7, estoque.getIdEstoque());
         preparedStatement.execute();

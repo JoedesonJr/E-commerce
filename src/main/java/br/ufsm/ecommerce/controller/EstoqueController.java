@@ -36,7 +36,7 @@ public class EstoqueController {
                  new Mensagem("OK", "Produto registrado com sucesso."), HttpStatus.OK);
         } else {
             return new ResponseEntity<Mensagem>(
-                new Mensagem("ERRO", ""), HttpStatus.OK);
+                new Mensagem("ERRO", "Produto não registrado."), HttpStatus.OK);
         }
     }
 }

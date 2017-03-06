@@ -20,8 +20,8 @@ public class UsuarioDAO {
     public boolean cadastrarUsuario(Usuario usuario) throws SQLException {
 
         query = " BEGIN; " +
-                " INSERT INTO usuario (cpf_cnpj, nome, email, endereco, senha) VALUES (?, ?, ?, ?, ?); " +
-                " INSERT INTO usuario_funcao (SELECT currval(pg_get_serial_sequence('usuario','idusuario')), ?); ";
+            " INSERT INTO usuario (cpf_cnpj, nome, email, endereco, senha) VALUES (?, ?, ?, ?, ?); " +
+            " INSERT INTO usuario_funcao (SELECT currval(pg_get_serial_sequence('usuario','idusuario')), ?); ";
 
         for (Telefone telefone: usuario.getTelefone()) {
             query += " INSERT INTO telefone (idusuario, telefone) (SELECT currval(pg_get_serial_sequence('usuario','idusuario')), ?); ";

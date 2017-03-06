@@ -5,11 +5,9 @@
 <div id="registrar-produto" class="modal grey lighten-5">
     <div class="modal-content">
         <h5 class="thin">
-            ;<i class="material-icons grey-text text-darken-2 small left">store</i> Registrar Produto
+            <i class="material-icons grey-text text-darken-2 small left">store</i> Registrar Produto
         </h5>
         <br/><br/>
-
-        validade: {{estoque.validade}}
 
         <!-- FORMULARIO -->
         <div class="row">
@@ -42,7 +40,7 @@
             <!-- VALIDADE -->
             <div class="input-field col l4 m4 s12">
                 <i class="material-icons prefix">today</i>
-                <input id="validade" type="text" name="validade" ng-model="estoque.validade" class="datepicker">
+                <input id="validade" type="text" name="validade" ng-model="estoque.validade | date: 'd MMMM, yyyy'" class="datepicker">
                 <label class="active" for="validade">Validade</label>
             </div>
         </div>

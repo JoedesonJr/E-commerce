@@ -40,15 +40,15 @@
             <tbody>
                 <tr ng-repeat="e in estoques" ng-class="{
                     'grey lighten-2': !e.preco && !e.st && !e.lote && !e.validade && !e.quantidade && !e.qtdMinima,
-                    'yellow lighten-4': e.qtMinima * 0.2 >= e.quantidade,
-                    'red lighten-4': e.qtMinima * 0.1 >= e.quantidade
+                    'yellow lighten-4': e.quantidade <= (e.qtdMinima * 0.2) + e.qtdMinima && e.quantidade > (e.qtdMinima * 0.1) + e.qtdMinima,
+                    'red lighten-4': e.quantidade <= (e.qtdMinima * 0.1) + e.qtdMinima
                     }">
                     <td class="center">{{e.produto.codigo}}</td>
-                    <td class="title thin black-text">{{e.produto.nome}}</td>
+                    <td>{{e.produto.nome}}</td>
                     <td class="center">{{e.preco | currency}}</td>
                     <td class="center">{{e.st | currency}}</td>
                     <td class="center">{{e.lote == null ? '-' : e.lote}}</td>
-                    <td class="center">{{e.validade == null ? '-' : e.validade}}</td>
+                    <td class="center">{{e.validade == null ? '-' : e.validade | date: "d MMMM, yyyy"}}</td>
                     <td class="center"><strong>{{e.quantidade}}/{{e.qtdMinima}}</strong></td>
                     <th class="center">
                         <a class="green-text" ng-click="modalRegistrarProduto(e)" href=""><i class="material-icons left">build</i></a>

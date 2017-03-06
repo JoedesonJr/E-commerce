@@ -80,15 +80,17 @@ public class ProdutoDAO {
 
     public boolean removerProduto(int idProduto) throws SQLException {
 
-        query = " DELETE FROM produto WHERE idProduto = ?; ";
+        query = " BEGIN; " +
+            " DELETE FROM estoque WHERE idProduto = ?; " +
+            " DELETE FROM produto WHERE idProduto = ?; " +
+            " COMMIT; ";
 
-        try {
-            preparedStatement = conn.prepareStatement(query);
+        preparedStatement = conn.prepareStatement(query);
             preparedStatement.setInt(1, idProduto);
-            preparedStatement.execute();
+            preparedStatement.setInt(2, idProduto);
+        preparedStatement.execute();
 
-            status = true;
-        } catch (Exception e) { e.printStackTrace(); }
+        status = true;
 
         conn.close();
         preparedStatement.close();
