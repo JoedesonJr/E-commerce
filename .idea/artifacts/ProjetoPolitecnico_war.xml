@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ProjetoPolitecnico:war">
+    <output-path>$USER_HOME$/Área de Trabalho/ProjetoPolitecnico/target</output-path>
+    <root id="archive" name="ProjetoPolitecnico.war">
+      <element id="artifact" artifact-name="ProjetoPolitecnico:war exploded" />
+    </root>
+  </artifact>
+</component>
