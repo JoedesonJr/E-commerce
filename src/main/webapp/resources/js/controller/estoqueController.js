@@ -1,4 +1,4 @@
-app.controller('estoqueController', function ($scope, $http, $timeout) {
+app.controller('estoqueController', function ($scope, $http, $filter) {
 
     $scope.estoques = [];
 
@@ -29,6 +29,12 @@ app.controller('estoqueController', function ($scope, $http, $timeout) {
 
     $scope.modalRegistrarProduto = function (estoque) {
         $scope.estoque = angular.copy(estoque);
+        $scope.estoque.validade = $filter('date')($scope.estoque.validade, "d MMMM, yyyy");
+        $scope.estoque.index = $scope.estoques.indexOf(estoque);
+
+        if($scope.estoque.validade != null) {
+            picker.set($scope.estoque.validade);
+        }
 
         $('.modal').modal();
         $('#registrar-produto').modal('open');
@@ -36,8 +42,8 @@ app.controller('estoqueController', function ($scope, $http, $timeout) {
 
     $scope.registrarProduto = function (produto) {
 
-        if(picker.component.item.select != null) {
-            produto.validade = Date.parse(picker.component.item.select.obj);
+        if(picker.get() != null) {
+            produto.validade = Date.parse(picker.get());
         }
 
         $http({
@@ -49,6 +55,11 @@ app.controller('estoqueController', function ($scope, $http, $timeout) {
 
             if(response.data.mensagem != null && response.data.status != null) {
                 if(response.data.status == 'OK') {
+                    $scope.estoques[$scope.estoque.index] = produto;
+
+                    if(picker.get() != null) {
+                        $scope.estoques[$scope.estoque.index].validade = picker.get();
+                    }
                     Materialize.toast(response.data.mensagem, 5000, 'green lighten-1');
                 } else {
                     Materialize.toast(response.data.mensagem, 5000, 'red lighten-1');

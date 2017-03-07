@@ -14,7 +14,7 @@
             <!-- PRODUTO -->
             <div class="input-field col l7 m7 s7">
                 <i class="material-icons prefix">redeem</i>
-                <input id="produto" type="text" name="produto" class="validate" ng-model="estoque.produto.nome" maxlength="50" disabled>
+                <input id="produto" type="text" name="produto" class="validate blue-text" ng-model="estoque.produto.nome" maxlength="50" disabled>
                 <label class="active" for="produto">Produto</label>
             </div>
             <!-- LOTE -->
@@ -28,19 +28,19 @@
             <!-- PRECO -->
             <div class="input-field col l4 m4 s12">
                 <i class="material-icons prefix">attach_money</i>
-                <input id="preco" type="text" name="preco" ng-model="estoque.preco" class="validate">
+                <input id="preco" type="text" name="preco" ng-model="estoque.preco" class="validate" ui-money-mask="2">
                 <label class="active" for="preco">Preço</label>
             </div>
             <!-- ST -->
             <div class="input-field col l4 m4 s12">
                 <i class="material-icons prefix">gavel</i>
-                <input id="st" type="text" name="st" ng-model="estoque.st" class="validate">
+                <input id="st" type="text" name="st" ng-model="estoque.st" class="validate" ui-money-mask="2">
                 <label class="active" for="st">ST</label>
             </div>
             <!-- VALIDADE -->
             <div class="input-field col l4 m4 s12">
                 <i class="material-icons prefix">today</i>
-                <input id="validade" type="text" name="validade" ng-model="estoque.validade | date: 'd MMMM, yyyy'" class="datepicker">
+                <input id="validade" type="text" name="validade" ng-model="estoque.validade" class="datepicker">
                 <label class="active" for="validade">Validade</label>
             </div>
         </div>
@@ -48,13 +48,13 @@
             <!-- QUANTIDADE -->
             <div class="input-field col l6 m4 s12">
                 <i class="material-icons prefix">add_circle_outline</i>
-                <input id="quantidade" type="text" name="quantidade" class="validate" ng-model="estoque.quantidade" maxlength="50">
+                <input id="quantidade" type="text" name="quantidade" class="validate" ng-model="estoque.quantidade" maxlength="50" ui-number-mask="0" ui-hide-group-sep>
                 <label class="active" for="quantidade">Quantidade em Estoque</label>
             </div>
             <!-- QUANTIDADE MINIMA -->
             <div class="input-field col l6 m4 s12">
                 <i class="material-icons prefix">remove_circle_outline</i>
-                <input id="quantidade-minima" type="text" name="quantidadeMinima" class="validate" ng-model="estoque.qtdMinima" maxlength="50">
+                <input id="quantidade-minima" type="text" name="quantidadeMinima" class="validate" ng-model="estoque.qtdMinima" maxlength="50" ui-number-mask="0" ui-hide-group-sep>
                 <label class="active" for="quantidade-minima">Quantidade Minima</label>
             </div>
         </div>
