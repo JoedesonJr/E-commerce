@@ -33,7 +33,7 @@
                 <div class="row">
                     <div class="col l11 md10 s9">
                         <img ng-src="{{p.foto}}" alt="{{p.nome}}" class="circle responsive-img">
-                        <span class="title thin black-text">{{p.nome}}  -  {{p.medida}}</span>
+                        <span class="title thin blue-text lighten-2"><strong>{{p.nome}}  -  {{p.medida}}</strong></span>
                         <p>{{p.grupo}}</p>
                     </div>
                     <div class="col l1 m2 s3">

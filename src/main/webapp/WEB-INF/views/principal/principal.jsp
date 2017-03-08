@@ -57,6 +57,7 @@
         <script src="<c:url value='/resources/js/controller/clienteController.js?r=<%=session.getId()%>'/>"></script>
         <script src="<c:url value='/resources/js/controller/principalController.js?r=<%=session.getId()%>'/>"></script>
         <script src="<c:url value='/resources/js/controller/estoqueController.js?r=<%=session.getId()%>'/>"></script>
+        <script src="<c:url value='/resources/js/controller/vendaController.js?r=<%=session.getId()%>'/>"></script>
 
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/materialize.min.js'/>"></script>

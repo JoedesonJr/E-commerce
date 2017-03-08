@@ -39,13 +39,7 @@
         </li>
         <!-- VENDAS -->
         <li>
-            <a class="blue-text text-darken-3 collapsible-header" style="margin-left: 15px; ">
+            <a class="blue-text text-darken-3 collapsible-header" href="#/visualizar/vendas" style="margin-left: 15px; ">
                 <i class="material-icons blue-text text-darken-3">shopping_cart</i> Vendas
-                <i class="material-icons blue-text text-darken-3 right">arrow_drop_down</i>
             </a>
-            <div class="collapsible-body grey lighten-4">
-                <ul>
-                    <li><a class="grey-text text-darken-3" onclick="$('.button-collapse').sideNav('hide');" href="#/visualizar/vendas">Visualizar Vendas</a></li>
-                </ul>
-            </div>
         </li>

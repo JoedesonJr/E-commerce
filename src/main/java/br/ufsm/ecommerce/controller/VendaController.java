@@ -7,7 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class VendaController {
 
     @RequestMapping(value = "/visualizar/vendas")
-    public String cadastro() {
+    public String visualizar() {
         return "principal/venda/vendas";
+    }
+
+    @RequestMapping(value = "/cadastro/venda")
+    public String cadastro() {
+        return "principal/venda/realizar-venda";
     }
 }

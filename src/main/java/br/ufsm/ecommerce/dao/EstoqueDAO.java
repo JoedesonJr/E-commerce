@@ -19,7 +19,7 @@ public class EstoqueDAO {
 
         ArrayList<Estoque> estoques = new ArrayList<Estoque>();
 
-        query = " SELECT idestoque, codigoproduto, nomeproduto, preco, " +
+        query = " SELECT idestoque, codigoproduto, nomeproduto, medida, preco, " +
             " st, lote, validade, quantidade, qtdminima FROM estoque, produto " +
             " WHERE produto.idproduto = estoque.idproduto; ";
 
@@ -33,6 +33,7 @@ public class EstoqueDAO {
                     Produto produto = new Produto();
                         produto.setNome(resultSet.getString("nomeproduto"));
                         produto.setCodigo(resultSet.getString("codigoproduto"));
+                        produto.setMedida(resultSet.getString("medida"));
                     estoque.setProduto(produto);
                     estoque.setPreco(resultSet.getFloat("preco"));
                     estoque.setSt(resultSet.getInt("st"));

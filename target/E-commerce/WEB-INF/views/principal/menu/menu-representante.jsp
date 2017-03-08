@@ -18,4 +18,4 @@
         <!-- VENDAS E ESTOQUE -->
         <li style="margin-top: 20px"><div class="divider"></div></li>
         <li style="margin-top: 10px"><a class="subheader">Gerênciamento e controle</a></li>
-        <li><a class="waves-effect blue-text text-darken-3" onclick="$('.button-collapse').sideNav('hide');" href=""><i class="material-icons blue-text text-darken-3">shopping_cart</i> Realizar Venda</a></li>
+        <li><a class="waves-effect blue-text text-darken-3" onclick="$('.button-collapse').sideNav('hide');" href="#/cadastro/venda"><i class="material-icons blue-text text-darken-3">shopping_cart</i> Realizar Venda</a></li>

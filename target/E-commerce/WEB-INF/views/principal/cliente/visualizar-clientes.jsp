@@ -33,7 +33,9 @@
             <li class="collection-item grey lighten-4" ng-repeat="u in usuarios">
                 <div class="row">
                     <div class="col l9 md9 s9">
-                        <span class="title thin black-text"> {{u.nomeCompleto}}  / CPF/ CNPJ: {{u.cpf_cnpj}}</span>
+                        <span class="title thin blue-text lighten-2">
+                            <strong>{{u.nomeCompleto}}  / CPF/ CNPJ: {{u.cpf_cnpj}}</strong>
+                        </span>
                         <p>
                             {{u.email}}<br>
                             <span class="grey-text text-darken-1">{{u.endereco}}</span>

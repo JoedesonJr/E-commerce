@@ -71,9 +71,6 @@ app.controller('estoqueController', function ($scope, $http, $filter) {
             console.log("Problema: " +response.data);
             Materialize.toast('Produto não registrado, tente novamente.', 5000, 'red lighten-1');
         });
-
-
-
     };
 
 });

@@ -48,6 +48,10 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'visualizar/vendas',
             controller: 'principalController'
         })
+        .when('/cadastro/venda', {
+            templateUrl: 'cadastro/venda',
+            controller: 'vendaController'
+        })
 
         // ESTOQUE
         .when('/cadastro/estoque', {
