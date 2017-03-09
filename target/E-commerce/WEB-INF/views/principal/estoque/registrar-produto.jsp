@@ -33,6 +33,7 @@
                 <th class="center"><i class="material-icons prefix">gavel</i></th>
                 <th class="center"><i class="material-icons prefix">view_module</i></th>
                 <th class="center"><i class="material-icons prefix">today</i></th>
+                <th class="center"><i class="material-icons prefix">local_shipping</i></th>
                 <th class="center">Qtd/ Min</th>
                 <th class="center"><i class="material-icons left">settings</i></th>
             </tr>
@@ -49,6 +50,7 @@
                     <td class="center">{{e.st | currency}}</td>
                     <td class="center">{{e.lote == null ? '-' : e.lote}}</td>
                     <td class="center">{{e.validade == null ? '-' : e.validade | date: "d MMMM, yyyy"}}</td>
+                    <td class="center">{{e.transporte | currency}}</td>
                     <td class="center"><strong>{{e.quantidade}}/{{e.qtdMinima}}</strong></td>
                     <th class="center">
                         <a class="green-text" ng-click="modalRegistrarProduto(e)" href=""><i class="material-icons left">build</i></a>

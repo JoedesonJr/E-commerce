@@ -12,6 +12,7 @@ public class Estoque {
     private Date validade;
     private int quantidade;
     private int qtdMinima;
+    private float transporte;
 
     public int getIdEstoque() {
         return idEstoque;
@@ -76,4 +77,8 @@ public class Estoque {
     public void setQtdMinima(int qtdMinima) {
         this.qtdMinima = qtdMinima;
     }
+
+    public float getTransporte() { return transporte; }
+
+    public void setTransporte(float transporte) { this.transporte = transporte; }
 }

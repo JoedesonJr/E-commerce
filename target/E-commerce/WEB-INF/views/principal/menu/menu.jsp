@@ -47,39 +47,15 @@
     <li style="margin-top: 20px"><a class="subheader">Cadastros</a></li>
     <li class="no-padding fixed">
         <ul class="collapsible collapsible-accordion">
-            <!-- PRODUTO -->
-            <li>
-                <a class="blue-text text-darken-3 collapsible-header" style="margin-left: 15px;">
-                    <i class="material-icons blue-text text-darken-3">redeem</i> Produto
-                    <i class="material-icons blue-text text-darken-3 right">arrow_drop_down</i>
-                </a>
-                <div class="collapsible-body grey lighten-4">
-                    <ul>
-                        <li><a class="grey-text text-darken-3" onclick="$('.button-collapse').sideNav('hide');" href="#/cadastro/produto">Cadastrar Produto</a></li>
-                        <li><a class="grey-text text-darken-3" onclick="$('.button-collapse').sideNav('hide');" href="#/visualizar/produtos">Visualizar/ Editar</a></li>
-                    </ul>
-                </div>
-            </li>
-            <!-- GRUPO -->
-            <li>
-                <a class="blue-text text-darken-3 collapsible-header" style="margin-left: 15px;">
-                    <i class="material-icons blue-text text-darken-3">dashboard</i> Grupo
-                    <i class="material-icons blue-text text-darken-3 right">arrow_drop_down</i>
-                </a>
-                <div class="collapsible-body grey lighten-4">
-                    <ul>
-                        <li><a class="grey-text text-darken-3" onclick="$('.button-collapse').sideNav('hide');" href="#/cadastro/grupo">Cadastrar Grupo</a></li>
-                        <li><a class="grey-text text-darken-3" onclick="$('.button-collapse').sideNav('hide');" href="#/visualizar/grupos">Visualizar/ Editar</a></li>
-                    </ul>
-                </div>
-            </li>
 
             <!-- MENU DISTRIBUIDOR -->
             <c:if test="${usuarioLogado.idFuncao == 1}">
+                <span ng-init="iniciarDistribuidor()"></span>
                 <c:import url="menu/menu-distribuidor.jsp"/>
             </c:if>
             <!-- MENU REPRESENTANTE -->
             <c:if test="${usuarioLogado.idFuncao == 2}">
+                <span ng-init="iniciarRepresentante()"></span>
                 <c:import url="menu/menu-representante.jsp"/>
             </c:if>
         </ul>

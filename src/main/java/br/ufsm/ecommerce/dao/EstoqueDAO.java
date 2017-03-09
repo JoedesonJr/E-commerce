@@ -20,7 +20,7 @@ public class EstoqueDAO {
         ArrayList<Estoque> estoques = new ArrayList<Estoque>();
 
         query = " SELECT idestoque, codigoproduto, nomeproduto, medida, preco, " +
-            " st, lote, validade, quantidade, qtdminima FROM estoque, produto " +
+            " st, lote, validade, quantidade, qtdminima, transporte FROM estoque, produto " +
             " WHERE produto.idproduto = estoque.idproduto; ";
 
         try {
@@ -41,6 +41,7 @@ public class EstoqueDAO {
                     estoque.setValidade(resultSet.getDate("validade"));
                     estoque.setQuantidade(resultSet.getInt("quantidade"));
                     estoque.setQtdMinima(resultSet.getInt("qtdminima"));
+                    estoque.setTransporte(resultSet.getFloat("transporte"));
                 estoques.add(estoque);
             }
 
@@ -54,7 +55,7 @@ public class EstoqueDAO {
     public boolean registrarProduto(Estoque estoque) throws Exception {
 
         query = " UPDATE estoque SET quantidade = ?, preco = ?, st = ?, " +
-            " lote = ?, validade = ?, qtdminima = ? WHERE idestoque = ?;";
+            " lote = ?, validade = ?, qtdminima = ?, transporte = ? WHERE idestoque = ?;";
 
         preparedStatement = conn.prepareStatement(query);
             preparedStatement.setInt(1, estoque.getQuantidade());
@@ -63,7 +64,8 @@ public class EstoqueDAO {
             preparedStatement.setString(4, estoque.getLote());
             preparedStatement.setDate(5, estoque.getValidade());
             preparedStatement.setInt(6, estoque.getQtdMinima());
-            preparedStatement.setInt(7, estoque.getIdEstoque());
+            preparedStatement.setFloat(7, estoque.getTransporte());
+            preparedStatement.setInt(8, estoque.getIdEstoque());
         preparedStatement.execute();
 
         if(preparedStatement.getUpdateCount() > 0) status = true;

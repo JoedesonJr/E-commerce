@@ -24,7 +24,7 @@ public class ProdutoDAO {
         query = " BEGIN; " +
             " INSERT INTO produto (idproduto, codigoproduto, nomeproduto, medida, descricao, idgrupo, foto) " +
             " VALUES (DEFAULT, ?, ?, ?, ?, ?, ?); " +
-            " INSERT INTO estoque (idproduto) (SELECT currval(pg_get_serial_sequence('produto','idproduto'))); " +
+            " INSERT INTO estoque (idproduto, qtdminima) (SELECT currval(pg_get_serial_sequence('produto','idproduto')), ?); " +
             " COMMIT; ";
 
         try {
@@ -35,6 +35,7 @@ public class ProdutoDAO {
                 preparedStatement.setString(4, produto.getDescricao());
                 preparedStatement.setInt(5, produto.getIdGrupo());
                 preparedStatement.setString(6, produto.getFoto());
+                preparedStatement.setInt(7, produto.getQtdMinima());
             preparedStatement.execute();
 
             status = true;

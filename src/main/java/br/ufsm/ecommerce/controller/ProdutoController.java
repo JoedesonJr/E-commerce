@@ -25,6 +25,8 @@ public class ProdutoController {
     @RequestMapping("cadastrarProduto")
     public ResponseEntity<Mensagem> cadastrarProduto (@RequestBody Produto produto) throws SQLException {
 
+        System.out.println("Qtd. minima: " +produto.getQtdMinima());
+
         if(new ProdutoDAO().cadastrarProduto(produto)) {
             return new ResponseEntity<Mensagem>(
                 new Mensagem("OK", "Cadastro efetuado com sucesso."), HttpStatus.OK);

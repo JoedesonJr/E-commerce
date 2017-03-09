@@ -119,27 +119,21 @@
                 <!-- PRECO/ QTD/ TOTAL -->
                 <div ng-if="produto" class="row">
                     <!-- PRECO -->
-                    <div class="col l3 input-field">
+                    <div class="col l4 input-field">
                         <i class="material-icons prefix">attach_money</i>
                         <input id="preco" type="text" ng-model="produto.preco" class="blue-text" ui-money-mask="2" disabled>
                         <label class="active black-text" for="preco">Preço</label>
                     </div>
-                    <!-- ST -->
-                    <div class="col l3 input-field">
-                        <i class="material-icons prefix">gavel</i>
-                        <input id="st" type="text" ng-model="produto.st" class="blue-text" ui-money-mask="2" disabled>
-                        <label class="active black-text" for="st">ST</label>
-                    </div>
                     <!-- QUANTIDADE -->
-                    <div class="col l3 input-field">
+                    <div class="col l4 input-field">
                         <i class="material-icons prefix">add_circle_outline</i>
                         <input id="quantidade" type="text" class="blue-text" ng-model="produto.qtd" maxlength="7" ui-number-mask="0" ui-hide-group-sep>
                         <label class="active black-text" for="quantidade">Quantidade</label>
                     </div>
                     <!-- VALOR TOTAL -->
-                    <div class="col l3 input-field">
+                    <div class="col l4 input-field">
                         <i class="material-icons prefix">attach_money</i>
-                        <input id="total" type="text" ng-model="produto.total" ng-value="produto.preco * produto.qtd | currency" class="blue-text" disabled>
+                        <input id="total" type="text" ng-model="produto.total" ng-value="(produto.preco + produto.st + produto.transporte) * produto.qtd | currency" class="blue-text" disabled>
                         <label class="active black-text" for="total">Valor Total</label>
                     </div>
                 </div>
@@ -174,7 +168,6 @@
                         <br/>
                     </div>
                 </div>
-
             </div> <!-- ./card-content -->
         </div> <!-- ./card -->
 
@@ -188,7 +181,7 @@
                         <div>
                             <a ng-click="removerProduto(item)" href="" class="secondary-content"><i class="material-icons red-text text-lighten-1">delete</i></a>
                             <span class="secondary-content grey-text">
-                                {{item.preco * item.qtd | currency}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                {{(item.preco + item.st + item.transporte) * item.qtd | currency}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </span>
                         </div>
                         <div class="collection-header blue-text">
@@ -212,6 +205,90 @@
                     </span>
                 </h5><br/>
 
+                <div ng-if="venda.pagamento == 'cartao'">
+                    <ul class="collapsible" data-collapsible="accordion">
+                        <li ng-click="selecionarCartao()" ng-repeat="cartao in cartoes">
+
+                            <div class="collapsible-header" ng-if="cartao.aceito">
+                                <i class="material-icons">credit_card</i> {{cartao.bandeira}}
+                            </div>
+                            <div class="collapsible-body grey lighten-4" ng-if="cartao.aceito">
+
+                                <div class="row">
+                                    <div class="col l6 input-field">
+                                        <i class="material-icons prefix">dialpad</i>
+                                        <input id="numero" type="text" >
+                                        <label class="blue-text" for="numero">Número do Cartão</label>
+                                    </div>
+                                    <div class="col l6">
+                                        <div class="row">
+                                            <div class="col l6 input-field">
+                                                <i class="material-icons prefix">event</i>
+                                                <input id="mes" type="text" >
+                                                <label for="mes">Mês</label>
+                                            </div>
+                                            <div class="col l6 input-field">
+                                                <i class="material-icons prefix">date_range</i>
+                                                <input id="ano" type="text" >
+                                                <label class="blue-text" for="ano">Ano</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col l8 input-field">
+                                        <i class="material-icons prefix">assignment_ind</i>
+                                        <input id="nome" type="text" >
+                                        <label class="blue-text" for="nome">Nome e Sobrenome impresso no Cartão</label>
+                                    </div>
+                                    <div class="col l4 input-field">
+                                        <i class="material-icons prefix">dialpad</i>
+                                        <input id="cpff" type="text" ng-model="lll" ui-br-cpfcnpj-mask>
+                                        <label class="blue-text" for="cpff">CPF do Titular</label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col l4 input-field">
+                                        <i class="material-icons prefix">lock_outline</i>
+                                        <input id="seg" type="text" >
+                                        <label class="blue-text" for="seg">Código de Segurança</label>
+                                    </div>
+                                    <div class="input-field col s8">
+                                        <select>
+                                            <optgroup label="Juros de 4,05%">
+                                                <option value="1">1x &nbsp;de&nbsp; {{total | currency}}</option>
+                                            </optgroup>
+                                            <optgroup label="Juros de 6,99%">
+                                                <option value="2">2x &nbsp;de&nbsp; {{((total + (total * 0.0699))/2) | currency}}</option>
+                                                <option value="2">3x &nbsp;de&nbsp; {{((total + (total * 0.0699))/3) | currency}}</option>
+                                                <option value="2">4x &nbsp;de&nbsp; {{((total + (total * 0.0699))/4) | currency}}</option>
+                                                <option value="2">5x &nbsp;de&nbsp; {{((total + (total * 0.0699))/5) | currency}}</option>
+                                                <option value="2">6x &nbsp;de&nbsp; {{((total + (total * 0.0699))/6) | currency}}</option>
+                                            </optgroup>
+                                            <optgroup label="Juros de 7,99%">
+                                                <option value="2">7x &nbsp;de&nbsp; {{((total + (total * 0.0799))/7) | currency}}</option>
+                                                <option value="2">8x &nbsp;de&nbsp; {{((total + (total * 0.0799))/8) | currency}}</option>
+                                                <option value="2">9x &nbsp;de&nbsp; {{((total + (total * 0.0799))/9) | currency}}</option>
+                                                <option value="2">10x &nbsp;de&nbsp; {{((total + (total * 0.0799))/10) | currency}}</option>
+                                                <option value="2">11x &nbsp;de&nbsp; {{((total + (total * 0.0799))/11) | currency}}</option>
+                                                <option value="2">12x &nbsp;de&nbsp; {{((total + (total * 0.0799))/12) | currency}}</option>
+                                            </optgroup>
+                                        </select>
+                                        <label class="blue-text">Parcelamento</label>
+                                    </div>
+                                </div>
+
+                                <button ng-click="" class="btn waves-effect waves-light blue lighten-2 left" type="button">Finalizar Venda
+                                    <i class="material-icons right">send</i>
+                                </button>
+                                <br/><br/>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
                 <div ng-if="venda.pagamento == 'dinheiro'" class="card-action">
                     <button ng-click="" class="btn waves-effect waves-light blue lighten-2 left" type="button">Finalizar Venda
                         <i class="material-icons right">send</i>
@@ -220,7 +297,6 @@
                 </div>
             </div> <!-- ./card-content -->
         </div> <!-- ./card -->
-
     </div> <!-- ./card-content -->
 </div> <!-- ./card -->
 <br/>

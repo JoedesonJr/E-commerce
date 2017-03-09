@@ -46,16 +46,22 @@
         </div>
         <div class="row">
             <!-- QUANTIDADE -->
-            <div class="input-field col l6 m4 s12">
+            <div class="input-field col l4 m4 s12">
                 <i class="material-icons prefix">add_circle_outline</i>
                 <input id="quantidade" type="text" name="quantidade" class="validate" ng-model="estoque.quantidade" maxlength="50" ui-number-mask="0" ui-hide-group-sep>
                 <label class="active" for="quantidade">Quantidade em Estoque</label>
             </div>
             <!-- QUANTIDADE MINIMA -->
-            <div class="input-field col l6 m4 s12">
+            <div class="input-field col l4 m4 s12">
                 <i class="material-icons prefix">remove_circle_outline</i>
                 <input id="quantidade-minima" type="text" name="quantidadeMinima" class="validate" ng-model="estoque.qtdMinima" maxlength="50" ui-number-mask="0" ui-hide-group-sep>
                 <label class="active" for="quantidade-minima">Quantidade Minima</label>
+            </div>
+            <!-- TRANSPORTE -->
+            <div class="input-field col l4 m4 s12">
+                <i class="material-icons prefix">local_shipping</i>
+                <input id="transporte" type="text" name="transporte" ng-model="estoque.transporte" class="validate" ui-money-mask="2">
+                <label class="active" for="st">Transporte</label>
             </div>
         </div>
 

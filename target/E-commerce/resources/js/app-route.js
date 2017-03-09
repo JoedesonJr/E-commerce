@@ -52,6 +52,10 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'cadastro/venda',
             controller: 'vendaController'
         })
+        .when('/cadastro/cartao', {
+            templateUrl: 'cadastro/cartao',
+            controller: 'vendaController'
+        })
 
         // ESTOQUE
         .when('/cadastro/estoque', {
@@ -63,5 +67,5 @@ app.config(['$routeProvider', function ($routeProvider) {
             controller: 'estoqueController'
         })
 
-        .otherwise({redirectTo: '/cadastro/produto'});
+        //.otherwise({redirectTo: '/cadastro/produto'});
 }]);

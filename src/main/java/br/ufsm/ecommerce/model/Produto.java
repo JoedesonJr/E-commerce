@@ -10,6 +10,7 @@ public class Produto {
     private String descricao;
     private String foto;
     private String grupo;
+    private int qtdMinima;
 
     public String getGrupo() {
         return grupo;
@@ -66,6 +67,10 @@ public class Produto {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    public int getQtdMinima() { return qtdMinima; }
+
+    public void setQtdMinima(int qtdMinima) { this.qtdMinima = qtdMinima; }
 
     public String getFoto() {
         return foto;

@@ -67,16 +67,21 @@
             </div>
             <div class="row">
                 <!-- CODIGO -->
-                <div class="input-field col s6">
+                <div class="input-field col s4">
                     <i class="material-icons prefix">dialpad</i>
                     <input id="codigo" type="text" name="codigo" ng-model="produto.codigo" class="validate">
                     <label for="codigo">Código</label>
                 </div>
                 <!-- MEDIDA -->
-                <div class="input-field col s6">
+                <div class="input-field col s4">
                     <i class="material-icons prefix">settings_ethernet</i>
                     <input id="medida" type="text" name="medida" ng-model="produto.medida" class="validate">
                     <label for="medida">Medida</label>
+                </div>
+                <div class="input-field col s4">
+                    <i class="material-icons prefix">add_circle_outline</i>
+                    <input id="quantidade" type="text" class="validate" ng-model="produto.qtdMinima" maxlength="7" ui-number-mask="0" ui-hide-group-sep>
+                    <label for="quantidade">Q. Minima</label>
                 </div>
             </div>
             <!-- DESCRICAO -->

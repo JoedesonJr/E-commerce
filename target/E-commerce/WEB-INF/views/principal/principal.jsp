@@ -34,7 +34,7 @@
     </head>
     <body ng-app="principal" ng-controller="principalController" ng-cloak>
         <c:if test="${usuarioLogado.idFuncao == 1}">
-            <div ng-init="iniciarDistribuidor()"></div>
+            <div></div>
         </c:if>
 
         <!-- MENU -->
