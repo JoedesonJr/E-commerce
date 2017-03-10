@@ -4,7 +4,7 @@ app.controller('principalController', function ($scope, $http, $location, $windo
         $location.path("/visualizar/vendas")
     };
     $scope.iniciarRepresentante = function () {
-        $location.path("/cadastro/venda");
+        $location.path("/cadastro/cliente");
     };
 
     $scope.modalAlterarSenha = function () {

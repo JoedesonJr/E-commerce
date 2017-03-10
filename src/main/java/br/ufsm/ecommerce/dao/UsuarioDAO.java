@@ -23,6 +23,9 @@ public class UsuarioDAO {
             " INSERT INTO usuario (cpf_cnpj, nome, email, endereco, senha) VALUES (?, ?, ?, ?, ?); " +
             " INSERT INTO usuario_funcao (SELECT currval(pg_get_serial_sequence('usuario','idusuario')), ?); ";
 
+        if(usuario.getIdFuncao() == 3) {
+            query += " INSERT INTO cliente_representante (SELECT currval(pg_get_serial_sequence('usuario','idusuario')), ?); ";
+        }
         for (Telefone telefone: usuario.getTelefone()) {
             query += " INSERT INTO telefone (idusuario, telefone) (SELECT currval(pg_get_serial_sequence('usuario','idusuario')), ?); ";
         }
@@ -39,6 +42,10 @@ public class UsuarioDAO {
             preparedStatement.setInt(6, usuario.getIdFuncao());
 
             int index = 6;
+            if(usuario.getIdFuncao() == 3) {
+                preparedStatement.setInt(7, usuario.getIdUsuario());
+                index++;
+            }
             for (Telefone telefone: usuario.getTelefone()) {
                 index++;
                 preparedStatement.setString(index, telefone.getTelefone());
@@ -55,17 +62,28 @@ public class UsuarioDAO {
         return status;
     }
 
-    public ArrayList<Usuario> getUsuarios(int idFuncao) {
+    public ArrayList<Usuario> getUsuarios(int idFuncao, int idUsuario, int funcao) {
 
         ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 
-        query = " SELECT * FROM usuario, usuario_funcao " +
-            " WHERE usuario.idusuario = usuario_funcao.idusuario " +
-            " AND usuario_funcao.idfuncao = ?; ";
+        if(funcao == 2) {
+            query = " SELECT * FROM usuario, usuario_funcao, cliente_representante " +
+                " WHERE usuario.idusuario = usuario_funcao.idusuario " +
+                " AND usuario_funcao.idfuncao = ? " +
+                " AND usuario.idusuario = cliente_representante.idcliente " +
+                " AND cliente_representante.idrepresentante = ?; ";
+        } else {
+            query = " SELECT * FROM usuario, usuario_funcao" +
+                " WHERE usuario.idusuario = usuario_funcao.idusuario " +
+                " AND usuario_funcao.idfuncao = ?; ";
+        }
 
         try {
             preparedStatement = conn.prepareStatement(query);
                 preparedStatement.setInt(1, idFuncao);
+                if(funcao == 2) {
+                    preparedStatement.setInt(2, idUsuario);
+                }
             resultSet = preparedStatement.executeQuery();
 
             ArrayList<Telefone> telefones = getTelefones(idFuncao);
@@ -144,6 +162,7 @@ public class UsuarioDAO {
         query = " BEGIN; " +
             " DELETE FROM telefone WHERE idusuario = ?; " +
             " DELETE FROM usuario_funcao WHERE idusuario = ?; " +
+            " DELETE FROM cliente_representante WHERE idcliente = ?; " +
             " DELETE FROM usuario WHERE idusuario = ?;" +
             " COMMIT; ";
 
@@ -152,6 +171,7 @@ public class UsuarioDAO {
                 preparedStatement.setInt(1, idUsuario);
                 preparedStatement.setInt(2, idUsuario);
                 preparedStatement.setInt(3, idUsuario);
+                preparedStatement.setInt(4, idUsuario);
             preparedStatement.execute();
 
             status = true;

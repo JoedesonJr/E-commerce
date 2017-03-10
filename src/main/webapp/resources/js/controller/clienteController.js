@@ -119,7 +119,8 @@ app.controller('clienteController', function ($scope, $http) {
                 endereco: usuario.endereco +" - CEP: "+ usuario.cep,
                 cpf_cnpj: usuario.cpf_cnpj,
                 telefone: [ {telefone: usuario.telefone1}, {telefone: usuario.telefone2} ],
-                idFuncao: 3
+                idFuncao: 3,
+                idUsuario: usuario.idUsuario
             };
 
             $http({

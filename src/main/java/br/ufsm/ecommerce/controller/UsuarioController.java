@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
@@ -71,7 +70,7 @@ public class UsuarioController {
 
         } else {
             return new ResponseEntity<Mensagem>(
-                new Mensagem("ERRO", "Já existe um usuário com este E-mail e/ou CPF/CNPJ."), HttpStatus.OK);
+                new Mensagem("ERRO", "Houve um problema, tente novamente."), HttpStatus.OK);
         }
     }
 
@@ -130,9 +129,12 @@ public class UsuarioController {
     }
 
     @RequestMapping("getUsuarios")
-    public ResponseEntity<ArrayList<Usuario>> getUsuarios(int idFuncao) {
+    public ResponseEntity<ArrayList<Usuario>> getUsuarios(int idFuncao, HttpSession session) {
+
+        Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+
         return new ResponseEntity<ArrayList<Usuario>>(
-            new UsuarioDAO().getUsuarios(idFuncao),HttpStatus.OK);
+            new UsuarioDAO().getUsuarios(idFuncao, usuario.getIdUsuario(), usuario.getIdFuncao()),HttpStatus.OK);
     }
 
 }

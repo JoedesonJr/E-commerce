@@ -29,7 +29,8 @@
         <br/>
 
         <!-- FORMULARIO -->
-        <div class="row">
+        <div class="row" ng-init="usuario.idUsuario='${usuarioLogado.idUsuario}'">
+
             <!-- NOME -->
             <div class="input-field col l8 s12">
                 <i class="material-icons prefix">account_circle</i>
