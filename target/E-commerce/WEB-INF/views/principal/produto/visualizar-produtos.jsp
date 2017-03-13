@@ -13,12 +13,12 @@
 </nav>
 
 <!-- CADASTRAR GRUPO -->
-<div class="card grey lighten-5" style="margin-top: 2%">
+<div class="card grey lighten-5" style="margin-top: 2%" ng-cloak>
     <div class="card-content">
         <!-- TITULO -->
-        <i class="material-icons medium left grey-text text-darken-3 hide-on-small-only">redeem</i>
+        <i ng-if="!loading" class="material-icons medium left grey-text text-darken-3 hide-on-small-only">redeem</i>
         <h4 class="thin grey-text text-darken-3">
-            <span ng-if="produtos.length == 0">Não há produtos cadastrados</span>
+            <span ng-if="produtos.length == 0 && !loading">Não há produtos cadastrados</span>
             <span ng-if="produtos.length > 0">Produtos</span>
         </h4>
         <br/>
@@ -28,7 +28,18 @@
             <c:import url="../../mensagens/mensagens.jsp"/>
         </div>
 
-        <ul class="collection" ng-if="produtos">
+        <div ng-if="loading" class="card grey lighten-5">
+            <div class="card-content">
+                <div class="progress">
+                    <div class="indeterminate"></div>
+                </div>
+                <h5 class="title thin black-text">
+                    Carregando... Aguarde.
+                </h5>
+            </div>
+        </div>
+
+        <ul class="collection" ng-if="produtos.length > 0">
             <li class="collection-item avatar grey lighten-4" ng-repeat="p in produtos">
                 <div class="row">
                     <div class="col l11 md10 s9">

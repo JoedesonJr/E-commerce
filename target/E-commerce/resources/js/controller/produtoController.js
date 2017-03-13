@@ -1,14 +1,33 @@
-app.controller('produtoController', function ($scope, $http, $rootScope) {
+app.controller('produtoController', function ($scope, $http, $window) {
 
     $scope.produtos = [];
 
-    $http.get("getProdutos")
+    if($scope.produtos.length == 0) {
+        $scope.loading = true;
+
+        $http.get("getProdutos")
         .success(function (produtos) {
+            $scope.loading = false;
             $scope.produtos = produtos;
+        })
+        .catch(function (erro) {
+            $scope.loading = false;
+            Materialize.toast('Houve um problema ao tentar carregar os produtos. Tente novamente.', 5000, 'red lighten-1');
+            console.log('Problema: ' +erro);
+        });
+    }
+
+    $scope.grupos = [];
+
+    if($scope.grupos.length == 0) {
+        $http.get("getGrupos")
+        .success(function (grupos) {
+            $scope.grupos = grupos;
         })
         .catch(function (err) {
             console.log('Problema: ' +err);
-        });
+        })
+    }
 
     $scope.modalProduto = function (produto, acao) {
         $scope.prod = angular.copy(produto);
@@ -23,21 +42,9 @@ app.controller('produtoController', function ($scope, $http, $rootScope) {
         }
     }
 
-    $scope.fecharModalProduto = function (acao) {
-        $scope.prod = [];
-        $scope.produto = [];
-
-        if(acao == 'remover') {
-            $('#remover-produto').modal('close');
-        } else if(acao == 'editar') {
-            $('#editar-produto').modal('close');
-        }
-    }
-
     $scope.editarProduto = function (produto) {
 
         if(validarFormulario(produto)) {
-
             if(produto.grupo.idGrupo == null) {
                 produto.idGrupo = $scope.produto.idGrupo;
                 produto.grupo = $scope.produto.grupo;
@@ -52,7 +59,6 @@ app.controller('produtoController', function ($scope, $http, $rootScope) {
                 headers: "charset=utf-8",
                 data: produto
             }).then(function(response) {
-
                 if(response.data.mensagem != null && response.data.status != null) {
                     if(response.data.status == 'OK') {
                         Materialize.toast(response.data.mensagem, 5000, 'green lighten-1');
@@ -65,12 +71,16 @@ app.controller('produtoController', function ($scope, $http, $rootScope) {
                         $scope.produto.codigo = produto.codigo;
                         $scope.produto.medida = produto.medida;
                         $scope.produto.descricao = produto.descricao;
-
                     } else {
                         Materialize.toast(response.data.mensagem, 5000, 'red lighten-1');
                     }
                 } else {
                     Materialize.toast('Produto não atualizado, tente novamente.', 5000, 'red lighten-1');
+                    setTimeout(function () {
+                        $scope.$apply(function () {
+                            $window.location.reload();
+                        });
+                    }, 3000);
                 }
             },function(response) {
                 console.log("Problema: " +response.data);
@@ -82,30 +92,28 @@ app.controller('produtoController', function ($scope, $http, $rootScope) {
     $scope.removerProduto = function (produto) {
 
         if(produto != null) {
-
-            var produt = {
-                idProduto: produto.idProduto
-            };
-
             $http({
                 url: 'removerProduto',
                 method: "POST",
                 headers: "charset=utf-8",
-                data: produt
+                data: {idProduto: produto.idProduto}
             }).then(function(response) {
-
                 if(response.data.mensagem != null && response.data.status != null) {
                     if(response.data.status == 'OK') {
                         Materialize.toast('Produto removido com sucesso', 5000, 'green lighten-1');
 
                         // REMOVER OBJETO DA LISTA
                         $scope.produtos.splice($scope.produtos.indexOf($scope.produto), 1);
-
                     } else {
                         Materialize.toast('Produto não removido, tente novamente.', 5000, 'red lighten-1');
                     }
                 } else {
                     Materialize.toast('Produto não removido, tente novamente.', 5000, 'red lighten-1');
+                    setTimeout(function () {
+                        $scope.$apply(function () {
+                            $window.location.reload();
+                        });
+                    }, 3000);
                 }
             },function(response) {
                 console.log("Problema: " +response.data);
@@ -115,21 +123,10 @@ app.controller('produtoController', function ($scope, $http, $rootScope) {
             Materialize.toast('Produto não removido, tente novamente.', 5000, 'red lighten-1');
         }
     };
-    
-    $scope.grupos = [];
-
-    $http.get("getGrupos")
-        .success(function (grupos) {
-            $scope.grupos = grupos;
-        })
-        .catch(function (err) {
-            console.log('Problema: ' +err);
-        })
 
     $scope.cadastrarProduto = function (produto) {
 
         if(validarFormulario(produto)) {
-
             produto.idGrupo = produto.grupo.idGrupo;
             produto.grupo = produto.grupo.grupo;
 
@@ -138,74 +135,50 @@ app.controller('produtoController', function ($scope, $http, $rootScope) {
                 method: "POST",
                 headers: "charset=utf-8",
                 data: produto
-
             }).then(function(response) {
-
                 if(response.data.mensagem != null && response.data.status != null) {
                     if(response.data.status == 'OK') {
-                        //$scope.mensagem_OK = response.data.mensagem;
                         Materialize.toast(response.data.mensagem, 5000, 'green lighten-1');
                         delete $scope.produto;
                     } else {
-                        //$scope.mensagem_ERRO = response.data.mensagem;
                         Materialize.toast(response.data.mensagem, 5000, 'red lighten-1');
                     }
                 } else {
-                    //$scope.mensagem_ERRO = "Cadastro não efetuado, tente novamente.";
                     Materialize.toast("Cadastro não efetuado, tente novamente.", 5000, 'red lighten-1');
+                    setTimeout(function () {
+                        $scope.$apply(function () {
+                            $window.location.reload();
+                        });
+                    }, 3000);
                 }
             },function(response) {
                 console.log("Problema: " +response.data);
-                //$scope.mensagem_ERRO = "Cadastro não efetuado, tente novamente.";
                 Materialize.toast("Cadastro não efetuado, tente novamente.", 5000, 'red lighten-1');
             });
-            /*
-            setTimeout(function () {
-                $scope.$apply(function () {
-                    $scope.mensagem_ERRO = null;
-                    $scope.mensagem_OK = null;
-                });
-            }, 5000);
-            */
         }
     };
 
     function validarFormulario (produto) {
-
         if(produto == null) {
-            //$scope.mensagem_ERRO = "Preencha o formulário.";
             Materialize.toast("Preencha o formulário.", 5000, 'red lighten-1');
         } else if(produto.nome == null || produto.nome == "") {
-            //$scope.mensagem_ERRO = "Preencha o campo Nome.";
             Materialize.toast("Preencha o campo Nome.", 5000, 'red lighten-1');
         } else if(produto.grupo == null || produto.grupo == "") {
-            //$scope.mensagem_ERRO = "Selecione um Grupo.";
             Materialize.toast("Selecione um Grupo.", 5000, 'red lighten-1');
         } else if(produto.codigo == null || produto.codigo == "") {
-            //$scope.mensagem_ERRO = "Preencha o campo Código.";
             Materialize.toast("Preencha o campo Código.", 5000, 'red lighten-1');
         } else if(produto.medida == null || produto.medida == "") {
-            //$scope.mensagem_ERRO = "Preencha o campo Medida";
             Materialize.toast("Preencha o campo Medida", 5000, 'red lighten-1');
         } else if(produto.descricao == null || produto.descricao == "") {
-            //$scope.mensagem_ERRO = "Preencha o campo Descrição.";
             Materialize.toast("Preencha o campo Descrição.", 5000, 'red lighten-1');
         } else if(produto.foto == null || produto.foto == "") {
-            //$scope.mensagem_ERRO = "Insira uma foto.";
             Materialize.toast("Insira uma foto.", 5000, 'red lighten-1');
         } else if(produto.idProduto == 0) {
             Materialize.toast("Produto não alterado, tente novamente.", 5000, 'red lighten-1');
         } else {
-            //delete $scope.mensagem_ERRO;
             return true;
         }
-        /*
-        setTimeout(function () {
-            $scope.$apply(function () {
-                $scope.mensagem_ERRO = null;
-            });
-        }, 5000);
-        */
+
         return false;
     };
 

@@ -1,14 +1,21 @@
-app.controller('grupoController', function ($scope, $http) {
+app.controller('grupoController', function ($scope, $http, $window) {
 
     $scope.grupos = [];
 
-    $http.get("getGrupos")
+    if($scope.grupos.length == 0) {
+        $scope.loading = true;
+
+        $http.get("getGrupos")
         .success(function (grupos) {
+            $scope.loading = false;
             $scope.grupos = grupos;
         })
         .catch(function (err) {
+            $scope.loading = false;
+            Materialize.toast('Houve um problema ao tentar carregar os grupos. Tente novamente.', 5000, 'red lighten-1');
             console.log('Problema: ' +err);
         })
+    }
 
     $scope.modalGrupo = function (grupo, acao) {
         if(grupo.idGrupo == 1) {
@@ -27,39 +34,31 @@ app.controller('grupoController', function ($scope, $http) {
         }
     }
 
-    $scope.fecharModalGrupo = function (acao) {
-        $scope.grup = [];
-
-        if(acao == 'remover') {
-            $('#remover-grupo').modal('close');
-        } else if(acao == 'editar') {
-            $('#editar-grupo').modal('close');
-        }
-    }
-
     $scope.editarGrupo = function (grupo) {
 
         if(validarFormulario(grupo)) {
-
             $http({
                 url: 'atualizarGrupo',
                 method: "POST",
                 headers: "charset=utf-8",
                 data: grupo
             }).then(function(response) {
-
                 if(response.data.mensagem != null && response.data.status != null) {
                     if(response.data.status == 'OK') {
                         Materialize.toast(response.data.mensagem, 5000, 'green lighten-1');
 
                         // ATUALIZAR OBJETO DA LISTA
                         $scope.grupoLista.grupo = grupo.grupo;
-
                     } else {
                         Materialize.toast(response.data.mensagem, 5000, 'red lighten-1');
                     }
                 } else {
                     Materialize.toast('Grupo não atualizado, tente novamente.', 5000, 'red lighten-1');
+                    setTimeout(function () {
+                        $scope.$apply(function () {
+                            $window.location.reload();
+                        });
+                    }, 3000);
                 }
             },function(response) {
                 console.log("Problema: " +response.data);
@@ -69,106 +68,84 @@ app.controller('grupoController', function ($scope, $http) {
     };
 
     $scope.removerGrupo = function (grupo) {
-
         if(grupo != null) {
             if(grupo.idGrupo == 1) {
                 Materialize.toast('Este grupo não pode ser removido.', 5000, 'red lighten-1');
             } else if(grupo.idGrupo > 1) {
-                var produt = {
-                    idGrupo: grupo.idGrupo
-                };
 
                 $http({
                     url: 'removerGrupo',
                     method: "POST",
                     headers: "charset=utf-8",
-                    data: produt
+                    data: {idGrupo: grupo.idGrupo}
                 }).then(function(response) {
-
                     if(response.data.mensagem != null && response.data.status != null) {
                         if(response.data.status == 'OK') {
                             Materialize.toast('Grupo removido com sucesso', 5000, 'green lighten-1');
 
                             // REMOVER OBJETO DA LISTA
                             $scope.grupos.splice($scope.grupos.indexOf($scope.grupoLista), 1);
-
                         } else {
-                            Materialize.toast('1 Grupo não removido, tente novamente.', 5000, 'red lighten-1');
+                            Materialize.toast('Grupo não removido, tente novamente.', 5000, 'red lighten-1');
                         }
                     } else {
-                        Materialize.toast('2 Grupo não removido, tente novamente.', 5000, 'red lighten-1');
+                        Materialize.toast('Grupo não removido, tente novamente.', 5000, 'red lighten-1');
+                        setTimeout(function () {
+                            $scope.$apply(function () {
+                                $window.location.reload();
+                            });
+                        }, 3000);
                     }
                 },function(response) {
                     console.log("Problema: " +response.data);
-                    Materialize.toast('3 Grupo não removido, tente novamente.', 5000, 'red lighten-1');
+                    Materialize.toast('Grupo não removido, tente novamente.', 5000, 'red lighten-1');
                 });
             }
         } else {
-            Materialize.toast('4 Grupo não removido, tente novamente.', 5000, 'red lighten-1');
+            Materialize.toast('Grupo não removido, tente novamente.', 5000, 'red lighten-1');
         }
     }
 
     $scope.cadastrarGrupo = function (grupo) {
 
         if(validarFormulario(grupo)) {
-
             $http({
                 url: 'cadastrarGrupo',
                 method: "POST",
                 headers: "charset=utf-8",
                 data: grupo
-
             }).then(function(response) {
-
                 if(response.data.mensagem != null && response.data.status != null) {
                     if(response.data.status == 'OK') {
-                        //$scope.mensagem_OK = response.data.mensagem;
                         Materialize.toast(response.data.mensagem, 5000, 'green lighten-1');
                         delete $scope.grupo;
                     } else {
-                        //$scope.mensagem_ERRO = response.data.mensagem;
                         Materialize.toast(response.data.mensagem, 5000, 'red lighten-1');
                     }
                 } else {
-                    //$scope.mensagem_ERRO = "Cadastro não efetuado, tente novamente.";
                     Materialize.toast("Cadastro não efetuado, tente novamente.", 5000, 'red lighten-1');
+                    setTimeout(function () {
+                        $scope.$apply(function () {
+                            $window.location.reload();
+                        });
+                    }, 3000);
                 }
             },function(response) {
                 console.log("Problema: " +response.data);
-                //$scope.mensagem_ERRO = "Cadastro não efetuado, tente novamente.";
                 Materialize.toast("Cadastro não efetuado, tente novamente.", 5000, 'red lighten-1');
             });
-            /*
-            setTimeout(function () {
-                $scope.$apply(function () {
-                    $scope.mensagem_ERRO = null;
-                    $scope.mensagem_OK = null;
-                });
-            }, 5000);
-            */
         }
     };
 
     function validarFormulario (grupo) {
-
         if(grupo == null) {
-            //$scope.mensagem_ERRO = "Preencha o formulário.";
             Materialize.toast("Preencha o formulário.", 5000, 'red lighten-1');
         } else if(grupo.grupo == null || grupo.grupo == "") {
-            //$scope.mensagem_ERRO = "Preencha o campo Grupo.";
-            //$scope.mensagem_ERRO = "Preencha o formulário.";
             Materialize.toast("Preencha o formulário.", 5000, 'red lighten-1');
         } else {
-            //delete $scope.mensagem_ERRO;
             return true;
         }
-        /*
-        setTimeout(function () {
-            $scope.$apply(function () {
-                $scope.mensagem_ERRO = null;
-            });
-        }, 5000);
-        */
+
         return false;
     };
 

@@ -18,7 +18,7 @@
         <!-- TITULO -->
         <i class="material-icons medium left grey-text text-darken-3">dashboard</i>
         <h4 class="thin grey-text text-darken-3">
-            <span ng-if="grupos.length == 0">Não há grupos cadastrados</span>
+            <span ng-if="grupos.length == 0 && !loading">Não há grupos cadastrados</span>
             <span ng-if="grupos.length > 0">Grupos</span>
         </h4>
         <br/>
@@ -28,7 +28,18 @@
             <c:import url="../../mensagens/mensagens.jsp"/>
         </div>
 
-        <ul class="collection with-header" ng-if="grupos">
+        <div ng-if="loading" class="card grey lighten-5">
+            <div class="card-content">
+                <div class="progress">
+                    <div class="indeterminate"></div>
+                </div>
+                <h5 class="title thin black-text">
+                    Carregando... Aguarde.
+                </h5>
+            </div>
+        </div>
+
+        <ul class="collection with-header" ng-if="grupos.length > 0">
             <li class="collection-item grey lighten-4" ng-repeat="g in grupos">
                 <div> {{g.grupo}}
                     <!-- REMOVER GRUPO -->

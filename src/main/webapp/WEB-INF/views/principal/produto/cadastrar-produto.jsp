@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">language</i>
-                    <input id="url" type="text" name="foto" ng-model="produto.foto" class="validate">
+                    <input id="url" type="text" name="foto" ng-model="produto.foto">
                     <label for="url">URL</label>
                 </div>
             </div>
@@ -61,7 +61,7 @@
             <div class="row">
                 <div class="col l12 m12 s12 input-field">
                     <i class="material-icons prefix">mode_edit</i>
-                    <input id="nome" type="text" name="nome" ng-model="produto.nome" class="validate">
+                    <input id="nome" type="text" name="nome" ng-model="produto.nome" maxlength="50">
                     <label for="nome">Nome</label>
                 </div>
             </div>
@@ -69,18 +69,19 @@
                 <!-- CODIGO -->
                 <div class="input-field col s4">
                     <i class="material-icons prefix">dialpad</i>
-                    <input id="codigo" type="text" name="codigo" ng-model="produto.codigo" class="validate">
+                    <input id="codigo" type="text" name="codigo" ng-model="produto.codigo" maxlength="7" ui-number-mask="0" ui-hide-group-sep>
                     <label for="codigo">Código</label>
                 </div>
                 <!-- MEDIDA -->
                 <div class="input-field col s4">
                     <i class="material-icons prefix">settings_ethernet</i>
-                    <input id="medida" type="text" name="medida" ng-model="produto.medida" class="validate">
+                    <input id="medida" type="text" name="medida" ng-model="produto.medida" maxlength="30">
                     <label for="medida">Medida</label>
                 </div>
+                <!-- QUANT. MINIMA -->
                 <div class="input-field col s4">
                     <i class="material-icons prefix">add_circle_outline</i>
-                    <input id="quantidade" type="text" class="validate" ng-model="produto.qtdMinima" maxlength="7" ui-number-mask="0" ui-hide-group-sep>
+                    <input id="quantidade" type="text" ng-model="produto.qtdMinima" maxlength="7" ui-number-mask="0" ui-hide-group-sep>
                     <label for="quantidade">Q. Minima</label>
                 </div>
             </div>

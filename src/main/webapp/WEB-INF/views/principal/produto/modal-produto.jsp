@@ -68,22 +68,28 @@
             <div class="row">
                 <div class="col l12 m12 s12 input-field">
                     <i class="material-icons prefix">mode_edit</i>
-                    <input id="nome" type="text" name="nome" ng-model="prod.nome" class="validate">
+                    <input id="nome" type="text" name="nome" ng-model="prod.nome" maxlength="50">
                     <label class="active" for="nome">Nome</label>
                 </div>
             </div>
             <div class="row">
                 <!-- CODIGO -->
-                <div class="input-field col s6">
+                <div class="input-field col s4">
                     <i class="material-icons prefix">dialpad</i>
-                    <input id="codigo" type="text" name="codigo" ng-model="prod.codigo" class="validate">
+                    <input id="codigo" type="text" name="codigo" ng-model="prod.codigo" maxlength="7" ui-number-mask="0" ui-hide-group-sep>
                     <label class="active" for="codigo">Código</label>
                 </div>
                 <!-- MEDIDA -->
-                <div class="input-field col s6">
+                <div class="input-field col s4">
                     <i class="material-icons prefix">settings_ethernet</i>
-                    <input id="medida" type="text" name="medida" ng-model="prod.medida" class="validate">
+                    <input id="medida" type="text" name="medida" ng-model="prod.medida" maxlength="30">
                     <label class="active" for="medida">Medida</label>
+                </div>
+                <!-- QUANT. MINIMA -->
+                <div class="input-field col s4">
+                    <i class="material-icons prefix">add_circle_outline</i>
+                    <input id="quantidade" type="text" ng-model="prod.qtdMinima" maxlength="7" ui-number-mask="0" ui-hide-group-sep>
+                    <label for="quantidade">Q. Minima</label>
                 </div>
             </div>
             <!-- DESCRICAO -->
@@ -97,11 +103,11 @@
         </div>
     </div>
     <div class="modal-footer">
-        <a href="" ng-click="editarProduto(prod)" class=" modal-action modal-close waves-effect waves-light blue lighten-2 btn left" style="margin-left: 20px">
+        <a href="" ng-click="editarProduto(prod)" class="modal-action modal-close waves-effect waves-light blue lighten-2 btn left" style="margin-left: 20px">
             <i class="material-icons right">thumb_up</i> Editar
         </a>
 
-        <button ng-click="fecharModalProduto('editar')" class="btn-floating waves-effect waves-light red lighten-2 right" type="button" style="margin-right: 20px">
+        <button class="modal-close btn-floating waves-effect waves-light red lighten-2 right" type="button" style="margin-right: 20px">
             <i class="material-icons right">thumb_down</i>
         </button>
     </div>

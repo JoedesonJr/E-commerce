@@ -10,7 +10,6 @@ appLogin.controller("loginController",
                 method: "POST",
                 headers: "charset=utf-8",
                 data: $scope.usuario
-
             }).then(function(response) {
                 $scope.loading = false;
                 if(response.data.nomeCompleto != null) {
@@ -27,7 +26,7 @@ appLogin.controller("loginController",
                 }
             },function(response) {
                 $scope.loading = false;
-                console.log("Problema: " +response.data1);
+                console.log("Problema: " +response.data);
             });
         } else {
             $scope.mensagem_ERRO = "Preencha o campo email!";

@@ -33,7 +33,7 @@
             <!-- GRUPO -->
             <div class="input-field col l12 s12">
                 <i class="material-icons prefix">mode_edit</i>
-                <input id="nome" type="text" name="grupo" ng-model="grupo.grupo" class="validate" maxlength="50">
+                <input id="nome" type="text" name="grupo" ng-model="grupo.grupo" maxlength="100">
                 <label for="nome">Grupo</label>
             </div>
         </div>

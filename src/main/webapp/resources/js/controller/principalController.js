@@ -1,10 +1,10 @@
 app.controller('principalController', function ($scope, $http, $location, $window) {
 
     $scope.iniciarDistribuidor = function () {
-        $location.path("/visualizar/vendas")
+        //$location.path("/visualizar/vendas")
     };
     $scope.iniciarRepresentante = function () {
-        $location.path("/cadastro/cliente");
+        //$location.path("/cadastro/cliente");
     };
 
     $scope.modalAlterarSenha = function () {

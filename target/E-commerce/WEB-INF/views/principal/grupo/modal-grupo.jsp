@@ -37,7 +37,7 @@
         <div class="row">
             <!-- GRUPO -->
             <div class="input-field col l12 s12">
-                <input id="nome" type="text" name="grupo" ng-model="grup.grupo" class="validate" maxlength="50">
+                <input id="nome" type="text" name="grupo" ng-model="grup.grupo" maxlength="100">
                 <label class="active" for="nome">Grupo</label>
             </div>
         </div>
@@ -47,7 +47,7 @@
             <i class="material-icons right">thumb_up</i> Editar
         </a>
 
-        <button ng-click="fecharModalGrupo('editar')" class="btn-floating waves-effect waves-light red lighten-2 right" type="button" style="margin-right: 20px">
+        <button class="modal-close btn-floating waves-effect waves-light red lighten-2 right" type="button" style="margin-right: 20px">
             <i class="material-icons right">thumb_down</i>
         </button>
     </div>
