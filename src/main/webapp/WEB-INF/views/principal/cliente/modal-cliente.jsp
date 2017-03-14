@@ -39,13 +39,13 @@
             <!-- NOME -->
             <div class="input-field col l8 s12">
                 <i class="material-icons prefix">account_circle</i>
-                <input id="nome" type="text" name="nomeCompleto" ng-model="us.nomeCompleto" class="validate" maxlength="50">
+                <input id="nome" type="text" name="nomeCompleto" ng-model="us.nomeCompleto" maxlength="50">
                 <label class="active" for="nome">Nome Completo</label>
             </div>
             <!-- EMAIL -->
             <div class="input-field col l4 s12">
                 <i class="material-icons prefix">email</i>
-                <input id="email" type="text" name="email" class="validate" ng-model="us.email" maxlength="50">
+                <input id="email" type="text" name="email" ng-model="us.email" maxlength="50">
                 <label class="active" for="email">Email</label>
             </div>
         </div>
@@ -53,19 +53,19 @@
             <!-- CPF / CNPJ -->
             <div class="input-field col l4 m6 s12">
                 <i class="material-icons prefix">dialpad</i>
-                <input id="cpf" type="text" name="cpf_cnpj" ng-model="us.cpf_cnpj" class="validate" ui-br-cpfcnpj-mask>
+                <input id="cpf" type="text" name="cpf_cnpj" ng-model="us.cpf_cnpj" ui-br-cpfcnpj-mask>
                 <label class="active" for="cpf">CPF ou CNPJ</label>
             </div>
             <!-- TELEFONE 1 -->
             <div class="input-field col l4 m6 s12">
                 <i class="material-icons prefix">call</i>
-                <input id="telefone1" type="text" name="telefone1" ng-model="us.telefone[0].telefone" class="validate" ui-br-phone-number>
+                <input id="telefone1" type="text" name="telefone1" ng-model="us.telefone[0].telefone" ui-br-phone-number>
                 <label class="active" for="telefone1">Telefone 1</label>
             </div>
             <!-- TELEFONE 2 -->
             <div class="input-field col l4 m6 s12">
                 <i class="material-icons prefix">call</i>
-                <input id="telefone2" type="text" name="telefone2" ng-model="us.telefone[1].telefone" class="validate" ui-br-phone-number>
+                <input id="telefone2" type="text" name="telefone2" ng-model="us.telefone[1].telefone" ui-br-phone-number>
                 <label class="active" for="telefone2">Telefone 2</label>
             </div>
         </div>
@@ -73,13 +73,13 @@
             <!-- ENDEREÇO -->
             <div class="input-field col l8 s12">
                 <i class="material-icons prefix">location_on</i>
-                <input id="endereco" type="text" name="endereco" ng-model="us.endereco" class="validate">
+                <input id="endereco" type="text" name="endereco" ng-model="us.endereco" maxlength="100">
                 <label class="active" for="endereco">Endereço</label>
             </div>
             <!-- CEP -->
             <div class="input-field col l4 s12">
                 <i class="material-icons prefix">location_on</i>
-                <input id="cep" type="text" name="cep" ng-model="us.cep" class="validate" ui-br-cep-mask>
+                <input id="cep" type="text" name="cep" ng-model="us.cep" ui-br-cep-mask>
                 <label class="active" for="cep">CEP</label>
             </div>
         </div>
@@ -89,7 +89,7 @@
             <i class="material-icons right">thumb_up</i> Editar
         </a>
 
-        <button ng-click="fecharModalCliente('editar')" class="btn-floating waves-effect waves-light red lighten-2 right" type="button" style="margin-right: 20px">
+        <button class="modal-close btn-floating waves-effect waves-light red lighten-2 right" type="button" style="margin-right: 20px">
             <i class="material-icons right">thumb_down</i>
         </button>
     </div>

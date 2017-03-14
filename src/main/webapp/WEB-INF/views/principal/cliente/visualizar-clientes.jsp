@@ -19,7 +19,7 @@
         <i class="material-icons medium left grey-text text-darken-3 hide-on-small-only">perm_identity</i>
         <h4 class="thin grey-text text-darken-3">
 
-            <span ng-if="usuarios.length == 0">Não há clientes cadastrados</span>
+            <span ng-if="usuarios.length == 0 && !loading">Não há clientes cadastrados</span>
             <span ng-if="usuarios.length > 0">Clientes</span>
         </h4>
         <br/>
@@ -29,7 +29,18 @@
             <c:import url="../../mensagens/mensagens.jsp"/>
         </div>
 
-        <ul class="collection" ng-if="usuarios">
+        <div ng-if="loading" class="card grey lighten-5">
+            <div class="card-content">
+                <div class="progress">
+                    <div class="indeterminate"></div>
+                </div>
+                <h5 class="title thin black-text">
+                    Carregando... Aguarde.
+                </h5>
+            </div>
+        </div>
+
+        <ul class="collection" ng-if="usuarios.length > 0">
             <li class="collection-item grey lighten-4" ng-repeat="u in usuarios">
                 <div class="row">
                     <div class="col l9 md9 s9">

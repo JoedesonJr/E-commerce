@@ -1,14 +1,20 @@
-app.controller('representanteController', function ($scope, $http) {
+app.controller('representanteController', function ($scope, $http, $window) {
 
-    $scope.usuarios = [];
+     $scope.usuarios = [];
 
-    $http.get("getUsuarios?idFuncao=2")
+     if($scope.usuarios.length == 0) {
+        $scope.loading = true;
+
+         $http.get("getUsuarios?idFuncao=2")
         .success(function (usuarios) {
+            $scope.loading = false;
             $scope.usuarios = usuarios;
         })
         .catch(function (err) {
+            $scope.loading = false;
             console.log('Problema: ' +err);
         })
+     }
 
     $scope.modalRepresentante = function (representante, acao) {
         $scope.us = angular.copy(representante);
@@ -22,16 +28,6 @@ app.controller('representanteController', function ($scope, $http) {
             $('#editar-representante').modal('open');
         }
     }
-
-    $scope.fecharModalRepresentante = function (acao) {
-        $scope.us = [];
-
-        if(acao == 'remover') {
-            $('#remover-representante').modal('close');
-        } else if(acao == 'editar') {
-            $('#editar-representante').modal('close');
-        }
-    };
 
     $scope.editarRepresentante = function (representante) {
         if(validarFormulario(representante)) {
@@ -47,7 +43,6 @@ app.controller('representanteController', function ($scope, $http) {
                     headers: "charset=utf-8",
                     data: representante
                 }).then(function(response) {
-
                     if(response.data.mensagem != null && response.data.status != null) {
                         if(response.data.status == 'OK') {
                             Materialize.toast('Representante atualizado com sucesso', 5000, 'green lighten-1');
@@ -65,6 +60,11 @@ app.controller('representanteController', function ($scope, $http) {
                         }
                     } else {
                         Materialize.toast('Representante não atualizado, tente novamente.', 5000, 'red lighten-1');
+                        setTimeout(function () {
+                            $scope.$apply(function () {
+                                $window.location.reload();
+                            });
+                        }, 3000);
                     }
                 },function(response) {
                     console.log("Problema: " +response.data);
@@ -77,7 +77,6 @@ app.controller('representanteController', function ($scope, $http) {
     };
 
     $scope.removerRepresentante = function (representante) {
-
         if(representante != null) {
 
             var represent = {
@@ -103,6 +102,11 @@ app.controller('representanteController', function ($scope, $http) {
                     }
                 } else {
                     Materialize.toast('Representante não removido, tente novamente.', 5000, 'red lighten-1');
+                    setTimeout(function () {
+                        $scope.$apply(function () {
+                            $window.location.reload();
+                        });
+                    }, 3000);
                 }
             },function(response) {
                 console.log("Problema: " +response.data);
@@ -116,7 +120,6 @@ app.controller('representanteController', function ($scope, $http) {
     $scope.cadastrarRepresentante = function (usuario) {
 
         if(validarFormulario(usuario)) {
-
             var user = {
                 nomeCompleto: usuario.nomeCompleto,
                 email: usuario.email,
@@ -133,70 +136,47 @@ app.controller('representanteController', function ($scope, $http) {
                 data: user
 
             }).then(function(response) {
-
                 if(response.data.mensagem != null && response.data.status != null) {
                     if(response.data.status == 'OK') {
-                        //$scope.mensagem_OK = response.data.mensagem;
                         Materialize.toast(response.data.mensagem, 5000, 'green lighten-1');
                         delete $scope.usuario;
                     } else {
-                        //$scope.mensagem_ERRO = response.data.mensagem;
                         Materialize.toast(response.data.mensagem, 5000, 'red lighten-1');
                     }
                 } else {
-                    //$scope.mensagem_ERRO = "Cadastro não efetuado, tente novamente.";
                     Materialize.toast("Cadastro não efetuado, tente novamente.", 5000, 'red lighten-1');
+                    setTimeout(function () {
+                        $scope.$apply(function () {
+                            $window.location.reload();
+                        });
+                    }, 3000);
                 }
             },function(response) {
                 console.log("Problema: " +response.data);
-                //$scope.mensagem_ERRO = "Cadastro não efetuado, tente novamente.";
                 Materialize.toast("Cadastro não efetuado, tente novamente.", 5000, 'red lighten-1');
             });
-            /*
-            setTimeout(function () {
-                $scope.$apply(function () {
-                    $scope.mensagem_ERRO = null;
-                    $scope.mensagem_OK = null;
-                });
-            }, 5000);
-            */
         }
     };
 
     function validarFormulario (usuario) {
-
         if (usuario == null) {
-            //$scope.mensagem_ERRO = "Preencha o formulário.";
             Materialize.toast("Preencha o formulário.", 5000, 'red lighten-1');
         } else if (usuario.nomeCompleto == null || usuario.nomeCompleto == "") {
-            //$scope.mensagem_ERRO = "Preencha o campo Nome Completo.";
             Materialize.toast("Preencha o campo Nome Completo.", 5000, 'red lighten-1');
         } else if (usuario.email == null || usuario.email == "") {
-            //$scope.mensagem_ERRO = "Preencha o campo Email.";
             Materialize.toast("Preencha o campo Email.", 5000, 'red lighten-1');
         } else if (usuario.cpf_cnpj == null || usuario.cpf_cnpj == "") {
-            //$scope.mensagem_ERRO = "Preencha o campo CPF ou CNPJ.";
             Materialize.toast("CPF ou CNPJ invalido.", 5000, 'red lighten-1');
         } else if (usuario.idUsuario == null && usuario.telefone1 == null && usuario.telefone2 == null) {
-            //$scope.mensagem_ERRO = "Preencha algum dos campos Telefone.";
             Materialize.toast("Preencha algum dos campos Telefone.", 5000, 'red lighten-1');
         } else if (usuario.endereco == null || usuario.endereco == "") {
-            //$scope.mensagem_ERRO = "Preencha o campo Endereco.";
             Materialize.toast("Preencha o campo Endereco.", 5000, 'red lighten-1');
         } else if (usuario.cep == null || usuario.cep == "") {
-            //$scope.mensagem_ERRO = "Preencha o campo CEP.";
             Materialize.toast("Preencha o campo CEP.", 5000, 'red lighten-1');
         } else {
-            //delete $scope.mensagem_ERRO;
             return true;
         }
-        /*
-         setTimeout(function () {
-         $scope.$apply(function () {
-         $scope.mensagem_ERRO = null;
-         });
-         }, 5000);
-         */
+
         return false;
     };
 
