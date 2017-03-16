@@ -66,13 +66,17 @@ app.controller('estoqueController', function ($scope, $http, $filter) {
                 }
             } else {
                 Materialize.toast('Produto não registrado, tente novamente.', 5000, 'red lighten-1');
+                setTimeout(function () {
+                    $scope.$apply(function () {
+                        $window.location.reload();
+                    });
+                }, 3000);
             }
         },function(response) {
             console.log("Problema: " +response.data);
             Materialize.toast('Produto não registrado, tente novamente.', 5000, 'red lighten-1');
         });
     };
-
 });
 
 
