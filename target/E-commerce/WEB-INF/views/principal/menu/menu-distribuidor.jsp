@@ -59,9 +59,16 @@
         <li style="margin-top: 10px"><a class="subheader">Gerênciamento e controle</a></li>
         <!-- ESTOQUE -->
         <li>
-            <a class="blue-text text-darken-3 collapsible-header" onclick="$('.button-collapse').sideNav('hide');" href="#/cadastro/estoque" style="margin-left: 15px; ">
+            <a class="blue-text text-darken-3 collapsible-header" style="margin-left: 15px; ">
                 <i class="material-icons blue-text text-darken-3">store</i> Estoque
+                <i class="material-icons blue-text text-darken-3 right">arrow_drop_down</i>
             </a>
+            <div class="collapsible-body grey lighten-4">
+                <ul>
+                    <li><a class="grey-text text-darken-3" onclick="$('.button-collapse').sideNav('hide');" href="#/visualizar/estoque">Status do Estoque</a></li>
+                    <li><a class="grey-text text-darken-3" onclick="$('.button-collapse').sideNav('hide');" href="#/cadastro/estoque">Produtos em Estoque</a></li>
+                </ul>
+            </div>
         </li>
         <!-- VENDAS -->
         <li>
@@ -75,7 +82,4 @@
                     <li><a class="grey-text text-darken-3" onclick="$('.button-collapse').sideNav('hide');" href="#/cadastro/cartao">Cartões de Créditos</a></li>
                 </ul>
             </div>
-
-
-
         </li>

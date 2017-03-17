@@ -2,12 +2,18 @@ app.controller('estoqueController', function ($scope, $http, $filter) {
 
     $scope.estoques = [];
 
-    $http.get("getEstoque")
+    if($scope.estoques.length == 0) {
+        $scope.loading = true;
+
+        $http.get("getEstoque")
         .success(function (produtos) {
+            $scope.loading = false;
             $scope.estoques = produtos;
-        }).catch(function (err) {
-        console.log('Problema: ' +err);
-    });
+        }).catch(function (erro) {
+            $scope.loading = false;
+            console.log('Problema: ' +erro);
+        });
+    }
 
     var $input = $('.datepicker').pickadate({
         monthsFull: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],

@@ -16,11 +16,11 @@ public class EstoqueController {
 
     @RequestMapping("/cadastro/estoque")
     public String cadastro() {
-        return "principal/estoque/registrar-produto";
+        return "principal/estoque/produtos-estoque";
     }
 
     @RequestMapping("/visualizar/estoque")
-    public String visualizar() { return "principal/estoque/modal-registrar-produto"; }
+    public String visualizar() { return "principal/estoque/status-estoque"; }
 
     @RequestMapping("getEstoque")
     public ResponseEntity<ArrayList<Estoque>> getEstoque() {

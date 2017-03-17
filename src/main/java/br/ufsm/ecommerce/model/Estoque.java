@@ -13,6 +13,7 @@ public class Estoque {
     private int quantidade;
     private int qtdMinima;
     private float transporte;
+    private boolean disponivel;
 
     public int getIdEstoque() {
         return idEstoque;
@@ -81,4 +82,8 @@ public class Estoque {
     public float getTransporte() { return transporte; }
 
     public void setTransporte(float transporte) { this.transporte = transporte; }
+
+    public boolean isDisponivel() { return disponivel; }
+
+    public void setDisponivel(boolean disponivel) { this.disponivel = disponivel; }
 }
