@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 
 <!-- ALTERAR SENHA -->
-<div id="registrar-produto" class="modal grey lighten-5">
+<div id="editar-produto" class="modal grey lighten-5">
     <div class="modal-content">
         <h5 class="thin">
             <i class="material-icons grey-text text-darken-2 small left">store</i> Registrar Produto
@@ -51,23 +51,28 @@
                 <input id="quantidade" type="text" name="quantidade" class="validate" ng-model="estoque.quantidade" maxlength="50" ui-number-mask="0" ui-hide-group-sep>
                 <label class="active" for="quantidade">Quantidade em Estoque</label>
             </div>
-            <!-- QUANTIDADE MINIMA -->
-            <div class="input-field col l4 m4 s12">
-                <i class="material-icons prefix">remove_circle_outline</i>
-                <input id="quantidade-minima" type="text" name="quantidadeMinima" class="validate" ng-model="estoque.qtdMinima" maxlength="50" ui-number-mask="0" ui-hide-group-sep>
-                <label class="active" for="quantidade-minima">Quantidade Minima</label>
-            </div>
             <!-- TRANSPORTE -->
             <div class="input-field col l4 m4 s12">
                 <i class="material-icons prefix">local_shipping</i>
                 <input id="transporte" type="text" name="transporte" ng-model="estoque.transporte" class="validate" ui-money-mask="2">
                 <label class="active" for="st">Transporte</label>
             </div>
+            <div class="col l1 m1"></div>
+            <!-- DISPONIVEL -->
+            <div class="switch col l3 m3 s12">
+                <label>Disponível</label><br/><br/>
+                <label>
+                    Não
+                    <input type="checkbox" ng-model="estoque.disponivel">
+                    <span class="lever"></span>
+                    Sim
+                </label>
+            </div>
         </div>
 
     </div>
     <div class="modal-footer">
-        <a href="" ng-click="registrarProduto(estoque)" class="modal-action modal-close waves-effect waves-light blue lighten-2 btn left" style="margin-left: 20px">
+        <a href="" ng-click="editarProduto(estoque)" class="modal-action modal-close waves-effect waves-light blue lighten-2 btn left" style="margin-left: 20px">
             <i class="material-icons right">thumb_up</i> Confirmar
         </a>
 

@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <div ng-if="!loading && estoques.length == 0" class="card grey lighten-5">
+        <div ng-if="!loading && statusEstoque.length == 0" class="card grey lighten-5">
             <div class="card-content">
                 <h4 class="title thin black-text">
                     Não há Produtos cadastrados
@@ -44,7 +44,7 @@
             </div>
         </div>
 
-        <table class="bordered responsive-table" ng-if="estoques.length > 0">
+        <table class="bordered responsive-table" ng-if="statusEstoque.length > 0">
             <thead>
             <tr>
                 <th class="center"><i class="material-icons prefix">dialpad</i></th>
@@ -55,31 +55,17 @@
             </tr>
             </thead>
             <tbody>
-                <tr class="red lighten-4">
-                    <td class="center">1007</td>
-                    <td>Shampoo Treatment - Passo 1</td>
-                    <td class="center">10</td>
-                    <td class="center">10</td>
+                <tr ng-repeat="status in statusEstoque" ng-class="{
+                        'grey lighten-2 grey-text text-darken-2': status.quantidade <= 0,
+                        'red lighten-5 red-text text-lighten-1': status.quantidade <= status.produto.qtdMinima * 0.1,
+                        'yellow lighten-4 yellow-text text-darken-4': status.quantidade > status.produto.qtdMinima * 0.1 && status.quantidade <= status.produto.qtdMinima * 0.2
+                    }">
+                    <td class="center"><strong>{{status.produto.codigo}}</strong></td>
+                    <td>{{status.produto.nome}}</td>
+                    <td class="center"><strong>{{status.quantidade}}</strong></td>
+                    <td class="center"><strong>{{status.produto.qtdMinima}}</strong></td>
                     <th class="center">
-                        <a class="green-text" ng-click="modalRegistrarProduto(e)" href=""><i class="material-icons left">add_circle</i></a>
-                    </th>
-                </tr>
-                <tr>
-                    <td class="center">1122</td>
-                    <td>Sabonete</td>
-                    <td class="center">50</td>
-                    <td class="center">25</td>
-                    <th class="center">
-                        <a class="green-text" ng-click="modalRegistrarProduto(e)" href=""><i class="material-icons left">add_circle</i></a>
-                    </th>
-                </tr>
-                <tr class="grey lighten-2">
-                    <td class="center">1144</td>
-                    <td>Pasta de Dente</td>
-                    <td class="center">0</td>
-                    <td class="center">10</td>
-                    <th class="center">
-                        <a class="green-text" ng-click="modalRegistrarProduto(e)" href=""><i class="material-icons left">add_circle</i></a>
+                        <a class="green-text" ng-click="" href=""><i class="material-icons left">add_circle</i></a>
                     </th>
                 </tr>
             </tbody>

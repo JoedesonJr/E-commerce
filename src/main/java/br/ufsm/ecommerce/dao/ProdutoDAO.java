@@ -22,9 +22,9 @@ public class ProdutoDAO {
     public boolean cadastrarProduto(Produto produto) throws SQLException {
 
         query = " BEGIN; " +
-            " INSERT INTO produto (idproduto, codigoproduto, nomeproduto, medida, descricao, idgrupo, foto) " +
-            " VALUES (DEFAULT, ?, ?, ?, ?, ?, ?); " +
-            " INSERT INTO estoque (idproduto, qtdminima) (SELECT currval(pg_get_serial_sequence('produto','idproduto')), ?); " +
+            " INSERT INTO produto (idproduto, codigoproduto, nomeproduto, medida, descricao, idgrupo, foto, qtdminima) " +
+            " VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?); " +
+            " INSERT INTO estoque (idproduto, disponivel) (SELECT currval(pg_get_serial_sequence('produto','idproduto')), false); " +
             " COMMIT; ";
 
         try {
@@ -51,9 +51,9 @@ public class ProdutoDAO {
 
         ArrayList<Produto> produtos = new ArrayList<Produto>();
 
-        query = " SELECT idproduto, codigoproduto, nomeproduto, medida, descricao, foto, nomegrupo, produto.idgrupo" +
+        query = " SELECT idproduto, codigoproduto, nomeproduto, medida, descricao, foto, nomegrupo, produto.idgrupo, qtdminima" +
             " FROM produto, grupo " +
-            " WHERE produto.idgrupo = grupo.idgrupo; ";
+            " WHERE produto.idgrupo = grupo.idgrupo ORDER BY codigoproduto; ";
 
         try {
             preparedStatement = conn.prepareStatement(query);
@@ -69,6 +69,7 @@ public class ProdutoDAO {
                     produto.setFoto(resultSet.getString("foto"));
                     produto.setGrupo(resultSet.getString("nomegrupo"));
                     produto.setIdGrupo(resultSet.getInt("idgrupo"));
+                    produto.setQtdMinima(resultSet.getInt("qtdminima"));
                 produtos.add(produto);
             }
 
@@ -102,7 +103,7 @@ public class ProdutoDAO {
     public boolean atualizarProduto(Produto produto) throws SQLException {
 
         query = " UPDATE produto SET foto = ?, idgrupo = ?, nomeproduto = ?, " +
-            " codigoproduto = ?, medida = ?, descricao = ? WHERE idproduto = ?;";
+            " codigoproduto = ?, medida = ?, descricao = ?, qtdminima = ? WHERE idproduto = ?;";
 
         try {
             preparedStatement = conn.prepareStatement(query);
@@ -112,7 +113,8 @@ public class ProdutoDAO {
                 preparedStatement.setInt(4, Integer.parseInt(produto.getCodigo()));
                 preparedStatement.setString(5, produto.getMedida());
                 preparedStatement.setString(6, produto.getDescricao());
-                preparedStatement.setInt(7, produto.getIdProduto());
+            preparedStatement.setInt(7, produto.getQtdMinima());
+                preparedStatement.setInt(8, produto.getIdProduto());
             preparedStatement.execute();
 
             status = true;

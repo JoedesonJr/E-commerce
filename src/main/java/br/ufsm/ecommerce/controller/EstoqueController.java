@@ -28,10 +28,16 @@ public class EstoqueController {
             new EstoqueDAO().getEstoque(), HttpStatus.OK);
     }
 
-    @RequestMapping("registrarProduto")
-    public ResponseEntity<Mensagem> registrarProduto(@RequestBody Estoque estoque) throws Exception {
+    @RequestMapping("getStatusEstoque")
+    public ResponseEntity<ArrayList<Estoque>> getStatusEstoque() {
+        return new ResponseEntity<ArrayList<Estoque>>(
+            new EstoqueDAO().getStatusEstoque(), HttpStatus.OK);
+    }
 
-        if(new EstoqueDAO().registrarProduto(estoque)) {
+    @RequestMapping("editarProduto")
+    public ResponseEntity<Mensagem> editarProduto(@RequestBody Estoque estoque) throws Exception {
+
+        if(new EstoqueDAO().editarProduto(estoque)) {
             return new ResponseEntity<Mensagem>(
                  new Mensagem("OK", "Produto registrado com sucesso."), HttpStatus.OK);
         } else {

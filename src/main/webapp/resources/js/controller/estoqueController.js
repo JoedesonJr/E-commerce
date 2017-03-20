@@ -1,6 +1,20 @@
 app.controller('estoqueController', function ($scope, $http, $filter) {
 
     $scope.estoques = [];
+    $scope.statusEstoque = [];
+
+    if($scope.statusEstoque.length == 0) {
+        $scope.loading = true;
+
+        $http.get("getStatusEstoque")
+            .success(function (produtos) {
+                $scope.loading = false;
+                $scope.statusEstoque = produtos;
+            }).catch(function (erro) {
+            $scope.loading = false;
+            console.log('Problema: ' +erro);
+        });
+    }
 
     if($scope.estoques.length == 0) {
         $scope.loading = true;
@@ -33,7 +47,7 @@ app.controller('estoqueController', function ($scope, $http, $filter) {
 
     var picker = $input.pickadate('picker');
 
-    $scope.modalRegistrarProduto = function (estoque) {
+    $scope.modalEditarProduto = function (estoque) {
         $scope.estoque = angular.copy(estoque);
         $scope.estoque.validade = $filter('date')($scope.estoque.validade, "d MMMM, yyyy");
         $scope.estoque.index = $scope.estoques.indexOf(estoque);
@@ -43,17 +57,17 @@ app.controller('estoqueController', function ($scope, $http, $filter) {
         }
 
         $('.modal').modal();
-        $('#registrar-produto').modal('open');
+        $('#editar-produto').modal('open');
     };
 
-    $scope.registrarProduto = function (produto) {
+    $scope.editarProduto = function (produto) {
 
         if(picker.get() != null) {
             produto.validade = Date.parse(picker.get());
         }
 
         $http({
-            url: 'registrarProduto',
+            url: 'editarProduto',
             method: "POST",
             headers: "charset=utf-8",
             data: produto

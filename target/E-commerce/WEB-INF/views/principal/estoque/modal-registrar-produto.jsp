@@ -12,16 +12,26 @@
         <!-- FORMULARIO -->
         <div class="row">
             <!-- PRODUTO -->
-            <div class="input-field col l7 m7 s7">
+            <div class="input-field col l6 m6 s6">
                 <i class="material-icons prefix">redeem</i>
                 <input id="produto" type="text" name="produto" class="validate blue-text" ng-model="estoque.produto.nome" maxlength="50" disabled>
                 <label class="active" for="produto">Produto</label>
             </div>
             <!-- LOTE -->
-            <div class="input-field col l5 m5 s5">
+            <div class="input-field col l3 m3 s3">
                 <i class="material-icons prefix">view_module</i>
                 <input id="lote" type="text" name="lote" class="validate" ng-model="estoque.lote" maxlength="50">
                 <label class="active" for="lote">Lote</label>
+            </div>
+            <!-- DISPONIVEL -->
+            <div class="switch col l3 m3 s3">
+                <label class="active">Disponível</label><br/><br/>
+                <label>
+                    Não
+                    <input type="checkbox" ng-model="estoque.disponivel">
+                    <span class="lever"></span>
+                    Sim
+                </label>
             </div>
         </div>
         <div class="row">

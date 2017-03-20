@@ -173,6 +173,8 @@ app.controller('produtoController', function ($scope, $http, $window) {
             Materialize.toast("Preencha o campo Descrição.", 5000, 'red lighten-1');
         } else if(produto.foto == null || produto.foto == "") {
             Materialize.toast("Insira uma foto.", 5000, 'red lighten-1');
+        } else if(produto.qtdMinima == null || produto.qtdMinima == "") {
+            Materialize.toast("Preencha o campo Quantidade Minima.", 5000, 'red lighten-1');
         } else if(produto.idProduto == 0) {
             Materialize.toast("Produto não alterado, tente novamente.", 5000, 'red lighten-1');
         } else {

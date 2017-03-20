@@ -62,19 +62,19 @@
             </thead>
             <tbody>
                 <tr ng-repeat="e in estoques" ng-class="{
-                        'green lighten-4': e.disponivel,
-                        'red lighten-4': !e.disponivel
+                        'green lighten-5 green-text text-darken-3': e.disponivel,
+                        'red lighten-5 red-text text-lighten-1': !e.disponivel
                     }">
-                    <td class="center">{{e.produto.codigo}}</td>
+                    <td class="center"><strong>{{e.produto.codigo}}</strong></td>
                     <td>{{e.produto.nome}}</td>
-                    <td class="center">{{e.lote == null ? '-' : e.lote}}</td>
-                    <td class="center">{{e.preco | currency}}</td>
-                    <td class="center">{{e.st | currency}}</td>
-                    <td class="center">{{e.transporte | currency}}</td>
+                    <td class="center ">{{e.lote == null ? '-' : e.lote}}</td>
+                    <td class="center"><strong>{{e.preco | currency}}</strong></td>
+                    <td class="center"><strong>{{e.st | currency}}</strong></td>
+                    <td class="center"><strong>{{e.transporte | currency}}</strong></td>
                     <td class="center">{{e.validade == null ? '-' : e.validade | date: "d MMMM, yyyy"}}</td>
                     <td class="center"><strong>{{e.quantidade}}</strong></td>
                     <td class="center">
-                        <a class="green-text" ng-click="modalRegistrarProduto(e)" href=""><i class="material-icons">build</i></a>
+                        <a class="green-text" ng-click="modalEditarProduto(e)" href=""><i class="material-icons">build</i></a>
                     </td>
                 </tr>
             </tbody>
@@ -83,7 +83,7 @@
         <br><br><br><br>
 
         <!-- MODAL REGISTRAR PRODUTO -->
-        <c:import url="../estoque/modal-registrar-produto.jsp"/>
+        <c:import url="../estoque/modal-editar-produto.jsp"/>
 
     </div> <!-- ./card-content -->
 </div> <!-- ./card -->

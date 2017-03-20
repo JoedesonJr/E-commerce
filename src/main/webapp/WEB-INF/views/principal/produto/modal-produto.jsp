@@ -89,7 +89,7 @@
                 <div class="input-field col s4">
                     <i class="material-icons prefix">add_circle_outline</i>
                     <input id="quantidade" type="text" ng-model="prod.qtdMinima" maxlength="7" ui-number-mask="0" ui-hide-group-sep>
-                    <label for="quantidade">Q. Minima</label>
+                    <label class="active" for="quantidade">Q. Minima</label>
                 </div>
             </div>
             <!-- DESCRICAO -->
