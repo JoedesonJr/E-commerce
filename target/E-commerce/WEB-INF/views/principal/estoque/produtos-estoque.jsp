@@ -19,7 +19,7 @@
         <i class="material-icons medium left grey-text text-darken-3 hide-on-small-only">store</i>
         <h4 class="thin grey-text text-darken-3">
             Produtos em Estoque
-            <a class="btn-floating waves-effect waves-light blue lighten-2 right" style="margin-left: 30px">
+            <a ng-click="modalRegistrarProduto()" class="btn-floating waves-effect waves-light blue lighten-2 right" style="margin-left: 30px">
                 <i class="material-icons">add</i>
             </a>
             <div class="chip red lighten-4 right" style="margin-top: 5px"><span class="red-text text-lighten-1">Não Disponível</span></div>
@@ -82,8 +82,11 @@
 
         <br><br><br><br>
 
-        <!-- MODAL REGISTRAR PRODUTO -->
+        <!-- MODAL EDITAR PRODUTO -->
         <c:import url="../estoque/modal-editar-produto.jsp"/>
+
+        <!-- MODAL REGISTRAR PRODUTO -->
+        <c:import url="../estoque/modal-registrar-produto.jsp"/>
 
     </div> <!-- ./card-content -->
 </div> <!-- ./card -->

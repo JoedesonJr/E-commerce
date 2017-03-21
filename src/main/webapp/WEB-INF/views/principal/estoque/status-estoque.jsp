@@ -51,7 +51,6 @@
                 <th class="center"><i class="material-icons prefix">redeem</i></th>
                 <th class="center">Em Estoque</th>
                 <th class="center">Quant. Min.</th>
-                <th class="center"><i class="material-icons left">settings</i></th>
             </tr>
             </thead>
             <tbody>
@@ -64,9 +63,6 @@
                     <td>{{status.produto.nome}}</td>
                     <td class="center"><strong>{{status.quantidade}}</strong></td>
                     <td class="center"><strong>{{status.produto.qtdMinima}}</strong></td>
-                    <th class="center">
-                        <a class="green-text" ng-click="" href=""><i class="material-icons left">add_circle</i></a>
-                    </th>
                 </tr>
             </tbody>
         </table>

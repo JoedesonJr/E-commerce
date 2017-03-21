@@ -5,7 +5,7 @@
 <div id="editar-produto" class="modal grey lighten-5">
     <div class="modal-content">
         <h5 class="thin">
-            <i class="material-icons grey-text text-darken-2 small left">store</i> Registrar Produto
+            <i class="material-icons grey-text text-darken-2 small left">store</i> Editar Produto
         </h5>
         <br/><br/>
 

@@ -2,15 +2,16 @@ app.controller('estoqueController', function ($scope, $http, $filter) {
 
     $scope.estoques = [];
     $scope.statusEstoque = [];
+    $scope.produtos = [];
 
     if($scope.statusEstoque.length == 0) {
         $scope.loading = true;
 
         $http.get("getStatusEstoque")
-            .success(function (produtos) {
-                $scope.loading = false;
-                $scope.statusEstoque = produtos;
-            }).catch(function (erro) {
+        .success(function (produtos) {
+            $scope.loading = false;
+            $scope.statusEstoque = produtos;
+        }).catch(function (erro) {
             $scope.loading = false;
             console.log('Problema: ' +erro);
         });
@@ -27,6 +28,21 @@ app.controller('estoqueController', function ($scope, $http, $filter) {
             $scope.loading = false;
             console.log('Problema: ' +erro);
         });
+    }
+
+    if($scope.produtos.length == 0) {
+        $scope.loading = true;
+
+        $http.get("getProdutos")
+            .success(function (produtos) {
+                $scope.loading = false;
+                $scope.produtos = produtos;
+            })
+            .catch(function (erro) {
+                $scope.loading = false;
+                Materialize.toast('Houve um problema ao tentar carregar os produtos. Tente novamente.', 5000, 'red lighten-1');
+                console.log('Problema: ' +erro);
+            });
     }
 
     var $input = $('.datepicker').pickadate({
@@ -59,6 +75,11 @@ app.controller('estoqueController', function ($scope, $http, $filter) {
         $('.modal').modal();
         $('#editar-produto').modal('open');
     };
+
+    $scope.modalRegistrarProduto = function () {
+        $('.modal').modal();
+        $('#registrar-produto').modal('open');
+    }
 
     $scope.editarProduto = function (produto) {
 

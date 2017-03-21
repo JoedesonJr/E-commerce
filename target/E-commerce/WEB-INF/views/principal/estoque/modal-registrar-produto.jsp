@@ -13,15 +13,23 @@
         <div class="row">
             <!-- PRODUTO -->
             <div class="input-field col l6 m6 s6">
-                <i class="material-icons prefix">redeem</i>
-                <input id="produto" type="text" name="produto" class="validate blue-text" ng-model="estoque.produto.nome" maxlength="50" disabled>
-                <label class="active" for="produto">Produto</label>
+                <div class="row">
+                    <div class="col l1 m1">
+                        <br/>
+                        <i class="material-icons hide-on-small-only">redeem</i>
+                    </div>
+                    <div class="col l11 m11 s12 input-field">
+                        <select  ng-model="registrar.produto" class="browser-default" ng-options="produto.codigo +' - '+ produto.nome for produto in produtos">
+                            <option value="" disabled selected>  ---  Selecione um Produto  ---  </option>
+                        </select>
+                    </div>
+                </div>
             </div>
             <!-- LOTE -->
             <div class="input-field col l3 m3 s3">
                 <i class="material-icons prefix">view_module</i>
-                <input id="lote" type="text" name="lote" class="validate" ng-model="estoque.lote" maxlength="50">
-                <label class="active" for="lote">Lote</label>
+                <input id="lote" type="text" name="lote" class="validate" ng-model="registrar.lote" maxlength="50">
+                <label for="lote">Lote</label>
             </div>
             <!-- DISPONIVEL -->
             <div class="switch col l3 m3 s3">
