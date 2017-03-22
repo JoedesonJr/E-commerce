@@ -34,15 +34,15 @@ app.controller('estoqueController', function ($scope, $http, $filter) {
         $scope.loading = true;
 
         $http.get("getProdutos")
-            .success(function (produtos) {
-                $scope.loading = false;
-                $scope.produtos = produtos;
-            })
-            .catch(function (erro) {
-                $scope.loading = false;
-                Materialize.toast('Houve um problema ao tentar carregar os produtos. Tente novamente.', 5000, 'red lighten-1');
-                console.log('Problema: ' +erro);
-            });
+        .success(function (produtos) {
+            $scope.loading = false;
+            $scope.produtos = produtos;
+        })
+        .catch(function (erro) {
+            $scope.loading = false;
+            Materialize.toast('Houve um problema ao tentar carregar os produtos. Tente novamente.', 5000, 'red lighten-1');
+            console.log('Problema: ' +erro);
+        });
     }
 
     var $input = $('.datepicker').pickadate({
@@ -61,7 +61,7 @@ app.controller('estoqueController', function ($scope, $http, $filter) {
         selectYears: 15
     });
 
-    var picker = $input.pickadate('picker');
+    var picker = $input.pickadate('picker')
 
     $scope.modalEditarProduto = function (estoque) {
         $scope.estoque = angular.copy(estoque);
@@ -81,8 +81,13 @@ app.controller('estoqueController', function ($scope, $http, $filter) {
         $('#registrar-produto').modal('open');
     }
 
-    $scope.editarProduto = function (produto) {
+    $scope.registrarProduto = function (produto) {
 
+        console.log("Data: " +JSON.stringify(picker));
+
+    }
+
+    $scope.editarProduto = function (produto) {
         if(picker.get() != null) {
             produto.validade = Date.parse(picker.get());
         }

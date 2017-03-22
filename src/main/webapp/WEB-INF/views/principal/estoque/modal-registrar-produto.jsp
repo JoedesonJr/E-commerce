@@ -36,7 +36,7 @@
                 <label class="active">Disponível</label><br/><br/>
                 <label>
                     Não
-                    <input type="checkbox" ng-model="estoque.disponivel">
+                    <input type="checkbox" ng-model="registrar.disponivel">
                     <span class="lever"></span>
                     Sim
                 </label>
@@ -46,46 +46,49 @@
             <!-- PRECO -->
             <div class="input-field col l4 m4 s12">
                 <i class="material-icons prefix">attach_money</i>
-                <input id="preco" type="text" name="preco" ng-model="estoque.preco" class="validate" ui-money-mask="2">
-                <label class="active" for="preco">Preço</label>
+                <input id="preco" type="text" name="preco" ng-model="registrar.preco" class="validate" ui-money-mask="2">
+                <label for="preco">Preço</label>
             </div>
             <!-- ST -->
             <div class="input-field col l4 m4 s12">
                 <i class="material-icons prefix">gavel</i>
-                <input id="st" type="text" name="st" ng-model="estoque.st" class="validate" ui-money-mask="2">
-                <label class="active" for="st">ST</label>
+                <input id="st" type="text" name="st" ng-model="registrar.st" class="validate" ui-money-mask="2">
+                <label for="st">ST</label>
             </div>
+
+            Validade: {{registrar.validade}}
+
             <!-- VALIDADE -->
             <div class="input-field col l4 m4 s12">
                 <i class="material-icons prefix">today</i>
-                <input id="validade" type="text" name="validade" ng-model="estoque.validade" class="datepicker">
-                <label class="active" for="validade">Validade</label>
+                <input id="valid" type="text" name="valid" ng-model="registrar.validade" class="datepicker">
+                <label for="valid">Validade</label>
             </div>
         </div>
         <div class="row">
             <!-- QUANTIDADE -->
             <div class="input-field col l4 m4 s12">
                 <i class="material-icons prefix">add_circle_outline</i>
-                <input id="quantidade" type="text" name="quantidade" class="validate" ng-model="estoque.quantidade" maxlength="50" ui-number-mask="0" ui-hide-group-sep>
-                <label class="active" for="quantidade">Quantidade em Estoque</label>
+                <input id="quantidade" type="text" name="quantidade" class="validate" ng-model="registrar.quantidade" maxlength="50" ui-number-mask="0" ui-hide-group-sep>
+                <label for="quantidade">Quantidade em Estoque</label>
             </div>
             <!-- QUANTIDADE MINIMA -->
             <div class="input-field col l4 m4 s12">
                 <i class="material-icons prefix">remove_circle_outline</i>
-                <input id="quantidade-minima" type="text" name="quantidadeMinima" class="validate" ng-model="estoque.qtdMinima" maxlength="50" ui-number-mask="0" ui-hide-group-sep>
-                <label class="active" for="quantidade-minima">Quantidade Minima</label>
+                <input class="black-text" type="text" name="quantidadeMinima" ng-model="registrar.produto.qtdMinima" maxlength="50" ui-number-mask="0" ui-hide-group-sep disabled>
+                <label class="active grey-text">Quantidade Minima</label>
             </div>
             <!-- TRANSPORTE -->
             <div class="input-field col l4 m4 s12">
                 <i class="material-icons prefix">local_shipping</i>
-                <input id="transporte" type="text" name="transporte" ng-model="estoque.transporte" class="validate" ui-money-mask="2">
-                <label class="active" for="st">Transporte</label>
+                <input id="transporte" type="text" name="transporte" ng-model="registrar.transporte" class="validate" ui-money-mask="2">
+                <label for="st">Transporte</label>
             </div>
         </div>
 
     </div>
     <div class="modal-footer">
-        <a href="" ng-click="registrarProduto(estoque)" class="modal-action modal-close waves-effect waves-light blue lighten-2 btn left" style="margin-left: 20px">
+        <a ng-click="registrarProduto(registrar)" class="modal-action modal-close waves-effect waves-light blue lighten-2 btn left" style="margin-left: 20px">
             <i class="material-icons right">thumb_up</i> Confirmar
         </a>
 
